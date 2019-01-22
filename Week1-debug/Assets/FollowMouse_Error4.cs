@@ -5,7 +5,7 @@ public class FollowMouse_Error4 : MonoBehaviour {
 
 	GameObject player;
 
-	void start(){
+	void Start(){
 		player = GameObject.Find ("Player");
 	}
 

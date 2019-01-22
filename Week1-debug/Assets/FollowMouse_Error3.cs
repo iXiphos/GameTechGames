@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FollowMouse_Error3 : MonoBehaviour {
 
-	void update () {
+	void Update () {
 
 		Follow ();
 	}

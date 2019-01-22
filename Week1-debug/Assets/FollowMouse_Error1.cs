@@ -5,7 +5,7 @@ public class FollowMouse_Error1 : MonoBehaviour {
 
 	void Update () {
 
-		Follow ()
+        Follow();
 	}
 
 
