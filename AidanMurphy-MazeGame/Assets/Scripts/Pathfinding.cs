@@ -4,34 +4,39 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    Grid grid;
-    public Transform StartPosition;
-    public Transform TargetPosition;
+    Grid grid; //Grid script
+    public Transform StartPosition; //Start location    
+    public Transform TargetPosition; //End location
 
-    public GameObject orca;
-    int i = 1;
+    public GameObject Enemy; //Enemy
 
-    private Node memes;
+    private Node memes; //The node enemy should move towards
+
+    private bool once = true;
+
+    private List<Node> path;
+
+    private int i = 0;
 
     private void Awake()
     {
-        grid = GetComponent<Grid>();
+        grid = GetComponent<Grid>(); //Get Grid Component
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-
-        FindPath(StartPosition.position, TargetPosition.position);
-
-        Debug.Log(grid.FinalPath[i].Position);
-        Debug.Log(orca.transform.position);
-        if (orca.transform.position != grid.FinalPath[i].Position)
+        FindPath(StartPosition.position, TargetPosition.position); //Find path between enemy and player
+        Debug.Log(grid.FinalPath[0].Position);
+        //Debug.Log("Enemy: " + Enemy.transform.position);
+        if (Enemy.transform.position != grid.FinalPath[0].Position)
         {
-            orca.transform.position = Vector3.MoveTowards(orca.transform.position, grid.FinalPath[i].Position, 1f * Time.deltaTime * 2f);
+            Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, grid.FinalPath[0].Position, 0.1f); //Move enemy towards players node
+            once = true;
         }
-        else
+        if(Enemy.transform.position == grid.FinalPath[0].Position && once)
         {
-            i++;
+            Debug.Log("lol");
+            once = false;
         }
     }
 
@@ -107,5 +112,4 @@ public class Pathfinding : MonoBehaviour
 
         return ix + iy;
     }
-
 }

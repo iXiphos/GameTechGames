@@ -17,6 +17,8 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
+    public GameObject cicle;
+
     public void Start()
     {
         nodeDiameter = nodeRadius * 2;
@@ -29,17 +31,19 @@ public class Grid : MonoBehaviour
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector2 bottomLeft = new Vector2(transform.position.x, transform.position.y) - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
-        for(int y = 0; y < gridSizeY; y++)
+        for (int y = 0; y < gridSizeY; y++)
         {
             for (int x = 0; x < gridSizeX; x++)
             {
                 Vector2 worldPoint = bottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
                 bool Wall = true;
-                if(Physics2D.OverlapCircle(worldPoint, nodeRadius, WallMask))
+                if(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), WallMask))
                 {
                     Wall = false;
                 }
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
+                //if (Wall)
+                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
@@ -109,31 +113,5 @@ public class Grid : MonoBehaviour
 
         return NeighboringNodes;
     }
-
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 1));
-        if(grid != null)
-        {
-            foreach(Node n in grid)
-            {
-                if (n.isWall)
-                {
-                    Gizmos.color = Color.white;
-                }
-                else
-                {
-                    Gizmos.color = Color.yellow;
-                }
-                if(FinalPath != null)
-                {
-                    Gizmos.color = Color.red;
-                }
-
-                Gizmos.DrawCube(n.Position, Vector3.one * (nodeDiameter - Distance));
-            }
-        }
-    }
-    */
 
 }
