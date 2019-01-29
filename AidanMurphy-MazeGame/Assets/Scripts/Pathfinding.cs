@@ -26,7 +26,6 @@ public class Pathfinding : MonoBehaviour
     private void FixedUpdate()
     {
         FindPath(StartPosition.position, TargetPosition.position); //Find path between enemy and player
-        Debug.Log(grid.FinalPath[0].Position);
         //Debug.Log("Enemy: " + Enemy.transform.position);
         if (Enemy.transform.position != grid.FinalPath[0].Position)
         {
@@ -42,8 +41,8 @@ public class Pathfinding : MonoBehaviour
 
     void FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
     {
-        Node StartNode = grid.NodeFromWorldPosition(a_StartPos);
-        Node TargetNode = grid.NodeFromWorldPosition(a_TargetPos);
+        Node StartNode = grid.NodeFromWorldPosition(a_StartPos, true);
+        Node TargetNode = grid.NodeFromWorldPosition(a_TargetPos, false);
 
         List<Node> OpenList = new List<Node>();
         HashSet<Node> ClosedList = new HashSet<Node>();

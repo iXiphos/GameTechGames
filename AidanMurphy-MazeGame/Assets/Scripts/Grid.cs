@@ -48,16 +48,17 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public Node NodeFromWorldPosition(Vector3 a_WorldPosition)
+    public Node NodeFromWorldPosition(Vector3 a_WorldPosition, bool enemy)
     {
         float xpoint = ((a_WorldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
         float ypoint = ((a_WorldPosition.y + gridWorldSize.y / 2) / gridWorldSize.y);
 
         xpoint = Mathf.Clamp01(xpoint);
         ypoint = Mathf.Clamp01(ypoint);
-
-        int x = Mathf.RoundToInt((gridSizeX - 1) * xpoint);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
+        int x = (int)xpoint;
+        int y = (int)ypoint;
+        x = Mathf.RoundToInt((gridSizeX - 1) * xpoint);
+        y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
 
         return grid[x, y];
     }
