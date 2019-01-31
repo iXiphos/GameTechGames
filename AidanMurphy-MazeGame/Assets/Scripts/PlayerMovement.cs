@@ -32,60 +32,79 @@ public class PlayerMovement : MonoBehaviour
 
     public Camera mainCamera;
 
+    private Vector3 start, end;
+
+    private bool locSet = false;
+
+    public float delay;
+
     // Start is called before the first frame update
     void Start()
     {
         originalCameraPosition = mainCamera.transform.position;
         grid = gameManager.GetComponent<Grid>();
+        StartCoroutine(wait());
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        StartNode = grid.NodeFromWorldPosition(player.position, true);
         if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && move) StartCoroutine(Movement());
-        Shake();
+        if(locSet) Move(start, end);
+    }
+
+
+    void Move(Vector3 currLoc, Vector3 targetLoc)
+    {
+        Debug.Log(targetLoc);
+        Debug.Log(currLoc);
+        if(currLoc != targetLoc)
+        gameObject.transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * speed);
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1f);
+        StartNode = grid.NodeFromWorldPosition(player.position, true);
     }
 
     IEnumerator Movement()
     {
+        StartNode = grid.NodeFromWorldPosition(player.position, true);
         originalCameraPosition = mainCamera.transform.position;
         move = false;
         NeighboringNode = grid.GetNeighboringNodes(StartNode);
         if (Input.GetAxis("Horizontal") > 0 && NeighboringNode[0].isWall)
         {
-            player.position = NeighboringNode[0].Position;
-            move = false;
-            yield return new WaitForSeconds(0.05f);
-            shakeDuration = shakeDur;
-            yield return new WaitForSeconds(0.35f);
+            start = player.position;
+            end = NeighboringNode[0].Position;
+            locSet = true;
+            yield return new WaitForSeconds(delay);
             move = true;
         }
         else if (Input.GetAxis("Horizontal") < 0 && NeighboringNode[1].isWall)
         {
-            transform.position = NeighboringNode[1].Position;
-            move = false;
-            yield return new WaitForSeconds(0.05f);
-            shakeDuration = shakeDur;
-            yield return new WaitForSeconds(0.35f);
+            start = player.position;
+            end = NeighboringNode[1].Position;
+            locSet = true;
+            yield return new WaitForSeconds(delay);
             move = true;
         }
         else if (Input.GetAxis("Vertical") > 0 && NeighboringNode[2].isWall)
         {
-            transform.position = NeighboringNode[2].Position;
-            move = false;
-            yield return new WaitForSeconds(0.05f);
-            shakeDuration = shakeDur;
-            yield return new WaitForSeconds(0.35f);
+            start = player.position;
+            end = NeighboringNode[2].Position;
+            locSet = true;
+            yield return new WaitForSeconds(delay);
             move = true;
         }
         else if (Input.GetAxis("Vertical") < 0 && NeighboringNode[3].isWall)
         {
-            transform.position = NeighboringNode[3].Position;
-            move = false;
-            yield return new WaitForSeconds(0.05f);
-            shakeDuration = shakeDur;
-            yield return new WaitForSeconds(0.35f);
+            start = player.position;
+            end = NeighboringNode[3].Position;
+            locSet = true;
+            yield return new WaitForSeconds(delay);
             move = true;
         }
         else

@@ -2969,7 +2969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &585771630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3026,7 +3026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585771629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.5, y: 19.5, z: 0}
+  m_LocalPosition: {x: -10.4, y: 19.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.93424}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3167,7 +3167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 700924464}
-  offset: 2
+  offset: 6
 --- !u!1 &700924464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3261,13 +3261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fd20d3cde9a04ba5978e01b6511fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 3
   gameManager: {fileID: 1204848057}
   player: {fileID: 700924466}
   ShakeAmt: 0.01
-  shakeDur: 0.3
-  dampingSpeed: 2.6
+  shakeDur: 0.2
+  dampingSpeed: 1
   mainCamera: {fileID: 591836214}
+  delay: 0.35
 --- !u!50 &700924468
 Rigidbody2D:
   serializedVersion: 4
