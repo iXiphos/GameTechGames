@@ -57,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move(Vector3 currLoc, Vector3 targetLoc)
     {
-        Debug.Log(targetLoc);
-        Debug.Log(currLoc);
         if(currLoc != targetLoc)
         gameObject.transform.position = Vector3.MoveTowards(transform.position, targetLoc, Time.deltaTime * speed);
     }

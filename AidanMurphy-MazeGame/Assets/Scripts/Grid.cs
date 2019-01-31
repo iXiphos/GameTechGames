@@ -42,8 +42,8 @@ public class Grid : MonoBehaviour
                     Wall = false;
                 }
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
-                if (!Wall)
-                GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
+                //if (!Wall)
+                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
