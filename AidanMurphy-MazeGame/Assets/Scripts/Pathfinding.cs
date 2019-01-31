@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -12,11 +13,10 @@ public class Pathfinding : MonoBehaviour
 
     private Node memes; //The node enemy should move towards
 
-    private bool once = true;
+    private bool move = true;
 
     private List<Node> path;
 
-    private int i = 0;
 
     private void Awake()
     {
@@ -26,17 +26,19 @@ public class Pathfinding : MonoBehaviour
     private void FixedUpdate()
     {
         FindPath(StartPosition.position, TargetPosition.position); //Find path between enemy and player
-        //Debug.Log("Enemy: " + Enemy.transform.position);
-        if (Enemy.transform.position != grid.FinalPath[0].Position)
+        if (move)
         {
-            Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, grid.FinalPath[0].Position, 0.1f); //Move enemy towards players node
-            once = true;
+            StartCoroutine(Movement());
         }
-        if(Enemy.transform.position == grid.FinalPath[0].Position && once)
-        {
-            Debug.Log("lol");
-            once = false;
-        }
+    }
+
+    IEnumerator Movement()
+    {
+        move = false;
+        if (grid.FinalPath.Count != 0) Enemy.transform.position = grid.FinalPath[0].Position;
+        else Enemy.GetComponent<ResetGame>().reset = true;
+        yield return new WaitForSeconds(0.5f);
+        move = true;
     }
 
     void FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
@@ -94,12 +96,12 @@ public class Pathfinding : MonoBehaviour
     {
         List<Node> FinalPath = new List<Node>();
         Node CurrentNode = a_TargetNode;
-        while(CurrentNode != a_StartNode)
+        //FinalPath.Add(a_TargetNode);
+        while (CurrentNode != a_StartNode)
         {
             FinalPath.Add(CurrentNode);
             CurrentNode = CurrentNode.Parent;
-        }
-
+        };
         FinalPath.Reverse();
         grid.FinalPath = FinalPath;
     }

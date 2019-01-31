@@ -42,8 +42,8 @@ public class Grid : MonoBehaviour
                     Wall = false;
                 }
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
-                //if (Wall)
-                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
+                if (!Wall)
+                GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
@@ -68,10 +68,12 @@ public class Grid : MonoBehaviour
         List<Node> NeighboringNodes = new List<Node>();
         int xCheck, yCheck;
 
+
         xCheck = a_Node.gridX + 1;
 
         yCheck = a_Node.gridY;
 
+        //Get Right Node
         if(xCheck >= 0 && xCheck < gridSizeX)
         {
             if(yCheck >= 0 && yCheck < gridSizeY)
@@ -83,6 +85,7 @@ public class Grid : MonoBehaviour
         xCheck = a_Node.gridX - 1;
 
         yCheck = a_Node.gridY;
+        //Get Left Node
         if (xCheck >= 0 && xCheck < gridSizeX)
         {
             if(yCheck >= 0 && yCheck < gridSizeY)
@@ -94,6 +97,7 @@ public class Grid : MonoBehaviour
         xCheck = a_Node.gridX;
 
         yCheck = a_Node.gridY + 1;
+        //Get Up Load
         if (xCheck >= 0 && xCheck < gridSizeX)
         {
             if (yCheck >= 0 && yCheck < gridSizeY)
@@ -104,6 +108,7 @@ public class Grid : MonoBehaviour
         xCheck = a_Node.gridX;
 
         yCheck = a_Node.gridY - 1;
+        //Get Down Node
         if (xCheck >= 0 && xCheck < gridSizeX)
         {
             if (yCheck >= 0 && yCheck < gridSizeY)
