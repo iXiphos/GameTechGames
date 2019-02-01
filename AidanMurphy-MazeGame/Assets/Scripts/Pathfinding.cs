@@ -2,108 +2,134 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Pathfinding : MonoBehaviour
 {
     Grid grid; //Grid script
-    public Transform StartPosition; //Start location    
-    public Transform TargetPosition; //End location
 
-    public GameObject Enemy; //Enemy
-
-    private Node memes; //The node enemy should move towards
-
-    private bool move = true;
-
-    private List<Node> path;
+    PathRequestManager requestManager;
 
 
     private void Awake()
     {
         grid = GetComponent<Grid>(); //Get Grid Component
+        requestManager = GetComponent<PathRequestManager>();
     }
 
-    private void FixedUpdate()
+    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     {
-        FindPath(StartPosition.position, TargetPosition.position); //Find path between enemy and player
-        if (move)
-        {
-            StartCoroutine(Movement());
-        }
+        StartCoroutine(FindPath(startPos, targetPos));
     }
 
-    IEnumerator Movement()
-    {
-        move = false;
-        if (grid.FinalPath.Count != 0) Enemy.transform.position = grid.FinalPath[0].Position;
-        else Enemy.GetComponent<ResetGame>().reset = true;
-        yield return new WaitForSeconds(0.5f);
-        move = true;
-    }
 
-    void FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
+    IEnumerator FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
     {
+
+        Vector3[] wayPoints = new Vector3[0];
+
+        bool pathSuccess = false;
+
         Node StartNode = grid.NodeFromWorldPosition(a_StartPos, true);
         Node TargetNode = grid.NodeFromWorldPosition(a_TargetPos, false);
 
-        List<Node> OpenList = new List<Node>();
-        HashSet<Node> ClosedList = new HashSet<Node>();
 
-        OpenList.Add(StartNode);
-
-        while(OpenList.Count > 0)
+        if (!StartNode.isWall && !TargetNode.isWall)
         {
-            Node CurrentNode = OpenList[0];
-            for(int i = 1; i < OpenList.Count; i++)
-            {
-                if(OpenList[i].FCost < CurrentNode.FCost || OpenList[i].FCost == CurrentNode.FCost && OpenList[i].hCost < CurrentNode.hCost)
-                {
-                    CurrentNode = OpenList[i];
-                }
-            }
-            OpenList.Remove(CurrentNode);
-            ClosedList.Add(CurrentNode);
+            Debug.Log("working");
+            Heap<Node> OpenList = new Heap<Node>(grid.MaxSize);
+            HashSet<Node> ClosedList = new HashSet<Node>();
 
-            if(CurrentNode == TargetNode)
-            {
-                GetFinalPath(StartNode, TargetNode);
-            }
+            OpenList.Add(StartNode);
 
-            foreach(Node NeighborNode in grid.GetNeighboringNodes(CurrentNode))
+            while (OpenList.Count > 0)
             {
-                if(!NeighborNode.isWall || ClosedList.Contains(NeighborNode))
+                Node CurrentNode = OpenList.RemoveFirst();
+
+                ClosedList.Add(CurrentNode);
+
+                if (CurrentNode == TargetNode)
                 {
-                    continue;
+                    pathSuccess = true;
+                    break;
                 }
-                int MoveCost = CurrentNode.gCost + GetmanhattenDistance(CurrentNode, NeighborNode);
-                if(MoveCost < NeighborNode.gCost || !OpenList.Contains(NeighborNode))
+
+                foreach (Node NeighborNode in grid.GetNeighboringNodes(CurrentNode))
                 {
-                    NeighborNode.gCost = MoveCost;
-                    NeighborNode.hCost = GetmanhattenDistance(NeighborNode, TargetNode);
-                    NeighborNode.Parent = CurrentNode;
-                    if (!OpenList.Contains(NeighborNode))
+                    if (NeighborNode.isWall || ClosedList.Contains(NeighborNode))
                     {
-                        OpenList.Add(NeighborNode);
+                        continue;
                     }
+                    int MoveCost = CurrentNode.gCost + GetmanhattenDistance(CurrentNode, NeighborNode);
+                    if (MoveCost < NeighborNode.gCost || !OpenList.Contains(NeighborNode))
+                    {
+                        NeighborNode.gCost = MoveCost;
+                        NeighborNode.hCost = GetmanhattenDistance(NeighborNode, TargetNode);
+                        NeighborNode.Parent = CurrentNode;
+                        if (!OpenList.Contains(NeighborNode))
+                        {
+                            OpenList.Add(NeighborNode);
+                        }
+                        else
+                        {
+                            OpenList.UpdateItem(NeighborNode);
+                        }
+                    }
+
                 }
 
             }
-
         }
+        yield return null;
+        if (pathSuccess)
+        {
+            wayPoints = GetFinalPath(StartNode, TargetNode);
+        }
+        requestManager.FinishedProcessingPath(wayPoints, pathSuccess);
     }
 
-    void GetFinalPath(Node a_StartNode, Node a_TargetNode)
+    Vector3[] GetFinalPath(Node a_StartNode, Node a_TargetNode)
     {
         List<Node> FinalPath = new List<Node>();
         Node CurrentNode = a_TargetNode;
-        //FinalPath.Add(a_TargetNode);
         while (CurrentNode != a_StartNode)
         {
             FinalPath.Add(CurrentNode);
             CurrentNode = CurrentNode.Parent;
-        };
-        FinalPath.Reverse();
-        grid.FinalPath = FinalPath;
+        }
+        Debug.Log(FinalPath.Count);
+        Vector3[] waypoints = VectorPath(FinalPath);
+        Array.Reverse(waypoints);
+        return waypoints;
+
+
+
+    }
+
+    Vector3[] SimplifyPath(List<Node> path)
+    {
+        List<Vector3> waypoints = new List<Vector3>();
+        Vector2 directionOld = Vector2.zero;
+        for(int i = 1; i < path.Count; i++)
+        {
+            Vector2 directionNew = new Vector2(path[i-1].gridX - path[i].gridX, path[i-1].gridY - path[i].gridY);
+            if(directionNew != directionOld)
+            {
+                waypoints.Add(path[i].Position);
+            }
+            directionOld = directionNew;
+        }
+        return waypoints.ToArray();
+    }
+
+    Vector3[] VectorPath(List<Node> path)
+    {
+        List<Vector3> waypoints = new List<Vector3>();
+        for (int i = 0; i < path.Count; i++)
+        {
+            waypoints.Add(path[i].Position);
+        }
+        return waypoints.ToArray();
     }
 
     public int GetmanhattenDistance(Node nodeA, Node nodeB)

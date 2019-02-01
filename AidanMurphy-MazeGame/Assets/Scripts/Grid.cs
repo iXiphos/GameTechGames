@@ -17,9 +17,11 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
+    int x = 0, y = 0;
+
     public GameObject cicle;
 
-    public void Start()
+    public void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -27,23 +29,32 @@ public class Grid : MonoBehaviour
         CreateGrid(); 
     }
 
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
+
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector2 bottomLeft = new Vector2(transform.position.x, transform.position.y) - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
-        for (int y = 0; y < gridSizeY; y++)
+        for (y = 0; y < gridSizeY; y++)
         {
-            for (int x = 0; x < gridSizeX; x++)
+            for (x = 0; x < gridSizeX; x++)
             {
                 Vector2 worldPoint = bottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
-                bool Wall = true;
-                if(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), WallMask))
+                bool Wall = false;
+                if(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask))
                 {
-                    Wall = false;
+                    Wall = true;
+                    Debug.Log(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask).name);
                 }
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
-                //if (!Wall)
-                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
+                if (Wall)
+                GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
@@ -55,10 +66,8 @@ public class Grid : MonoBehaviour
 
         xpoint = Mathf.Clamp01(xpoint);
         ypoint = Mathf.Clamp01(ypoint);
-        int x = (int)xpoint;
-        int y = (int)ypoint;
-        x = Mathf.RoundToInt((gridSizeX - 1) * xpoint);
-        y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
+        int x = Mathf.RoundToInt((gridSizeX - 1) * xpoint);
+        int y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
 
         return grid[x, y];
     }

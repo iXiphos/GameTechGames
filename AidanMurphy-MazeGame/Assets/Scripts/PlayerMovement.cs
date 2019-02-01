@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float delay;
 
+    public bool moved = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,32 +75,36 @@ public class PlayerMovement : MonoBehaviour
         originalCameraPosition = mainCamera.transform.position;
         move = false;
         NeighboringNode = grid.GetNeighboringNodes(StartNode);
-        if (Input.GetAxis("Horizontal") > 0 && NeighboringNode[0].isWall)
+        if (Input.GetAxis("Horizontal") > 0 && !NeighboringNode[0].isWall)
         {
+            moved = true;
             start = player.position;
             end = NeighboringNode[0].Position;
             locSet = true;
             yield return new WaitForSeconds(delay);
             move = true;
         }
-        else if (Input.GetAxis("Horizontal") < 0 && NeighboringNode[1].isWall)
+        else if (Input.GetAxis("Horizontal") < 0 && !NeighboringNode[1].isWall)
         {
+            moved = true;
             start = player.position;
             end = NeighboringNode[1].Position;
             locSet = true;
             yield return new WaitForSeconds(delay);
             move = true;
         }
-        else if (Input.GetAxis("Vertical") > 0 && NeighboringNode[2].isWall)
+        else if (Input.GetAxis("Vertical") > 0 && !NeighboringNode[2].isWall)
         {
+            moved = true;
             start = player.position;
             end = NeighboringNode[2].Position;
             locSet = true;
             yield return new WaitForSeconds(delay);
             move = true;
         }
-        else if (Input.GetAxis("Vertical") < 0 && NeighboringNode[3].isWall)
+        else if (Input.GetAxis("Vertical") < 0 && !NeighboringNode[3].isWall)
         {
+            moved = true;
             start = player.position;
             end = NeighboringNode[3].Position;
             locSet = true;
