@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//The way my movement works, was causing on trigger enter to break. I had to make my own collision using the system I was using
 public class Collectable : MonoBehaviour
 {
     Grid grid;
