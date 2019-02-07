@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && move) StartCoroutine(Movement());
-        if(locSet) Move(start, end);
+        if (locSet) Move(start, end);
     }
 
 

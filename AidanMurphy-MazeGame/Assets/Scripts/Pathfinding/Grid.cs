@@ -37,6 +37,7 @@ public class Grid : MonoBehaviour
         }
     }
 
+    //Generate a gridq
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
@@ -53,12 +54,13 @@ public class Grid : MonoBehaviour
                     Debug.Log(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask).name);
                 }
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
-                if (Wall)
-                GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
+                //if (Wall)
+                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
 
+    //Turn the World position of Game Object to Node location
     public Node NodeFromWorldPosition(Vector3 a_WorldPosition, bool enemy)
     {
         float xpoint = ((a_WorldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
@@ -72,6 +74,7 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
+    //Return a list of nodes that represent the nodes next to object
     public List<Node> GetNeighboringNodes(Node a_Node)
     {
         List<Node> NeighboringNodes = new List<Node>();

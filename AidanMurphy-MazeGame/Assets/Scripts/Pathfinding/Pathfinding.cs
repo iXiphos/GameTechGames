@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 
 public class Pathfinding : MonoBehaviour
@@ -9,8 +8,6 @@ public class Pathfinding : MonoBehaviour
     Grid grid; //Grid script
 
     PathRequestManager requestManager;
-
-
     private void Awake()
     {
         grid = GetComponent<Grid>(); //Get Grid Component
@@ -36,7 +33,7 @@ public class Pathfinding : MonoBehaviour
 
         if (!StartNode.isWall && !TargetNode.isWall)
         {
-            Debug.Log("working");
+            //Debug.Log("working");
             Heap<Node> OpenList = new Heap<Node>(grid.MaxSize);
             HashSet<Node> ClosedList = new HashSet<Node>();
 
@@ -85,6 +82,7 @@ public class Pathfinding : MonoBehaviour
         {
             wayPoints = GetFinalPath(StartNode, TargetNode);
         }
+        Debug.Log(pathSuccess);
         requestManager.FinishedProcessingPath(wayPoints, pathSuccess);
     }
 
@@ -97,13 +95,10 @@ public class Pathfinding : MonoBehaviour
             FinalPath.Add(CurrentNode);
             CurrentNode = CurrentNode.Parent;
         }
-        Debug.Log(FinalPath.Count);
+        //Debug.Log(FinalPath.Count);
         Vector3[] waypoints = VectorPath(FinalPath);
         Array.Reverse(waypoints);
         return waypoints;
-
-
-
     }
 
     Vector3[] SimplifyPath(List<Node> path)

@@ -13,6 +13,10 @@ public class Collectable : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject Enemy;
+
+    public GameObject Wall;
+
     public GameObject gameManager;
 
     public bool openExit;
@@ -45,7 +49,8 @@ public class Collectable : MonoBehaviour
 
     void UnlockExit()
     {
-        Debug.Log("Collision");
+        Enemy.SetActive(true);
+        Destroy(Wall);
     }
 
 }

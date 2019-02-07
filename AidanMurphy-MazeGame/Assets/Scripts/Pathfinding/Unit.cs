@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Unit : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class Unit : MonoBehaviour
     void Update()
     {
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-
+        if (target.transform.position == gameObject.transform.position)
+        {
+            gameObject.GetComponent<ResetGame>().reset = true;
+        }
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -36,7 +40,15 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
+        Vector3 currentWaypoint = new Vector3(0, 0, 0);
+        if (path.Length >= 0)
+        {
+            currentWaypoint = path[0];
+        }
+        else
+        {
+            gameObject.GetComponent<ResetGame>().reset = true;
+        }
         Debug.Log(path[path.Length - 1]);
         while (true)
         {
@@ -52,7 +64,7 @@ public class Unit : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             if (target.transform.position.x != path[path.Length - 1].x || target.transform.position.y != path[path.Length - 1].y)
             {
-                Debug.Log("Change Position");
+                //Debug.Log("Change Position");
                 PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
                 yield return null;
             }
