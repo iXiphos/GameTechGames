@@ -45,7 +45,7 @@ public class CoinsCollected : MonoBehaviour
             {
                 gameObject.GetComponent<Text>().text = "1/2 Coins Collected";
             }
-            else if (coinsCollected == 1)
+            else if (coinsCollected == 2)
             {
                 gameObject.GetComponent<Text>().text = "2/2 Coins Collected";
                 escape = true;

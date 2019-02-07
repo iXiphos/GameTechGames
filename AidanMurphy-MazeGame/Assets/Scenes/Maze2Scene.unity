@@ -204,6 +204,11 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 1488221499}
+    - target: {fileID: 6069204533621919584, guid: c7f56e6c50b261044b0420bbcd7f1f1f,
+        type: 3}
+      propertyPath: GridManager
+      value: 
+      objectReference: {fileID: 1789648934}
     - target: {fileID: 7478438020662008524, guid: c7f56e6c50b261044b0420bbcd7f1f1f,
         type: 3}
       propertyPath: m_Color.g
@@ -19155,6 +19160,11 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 1488221499}
+    - target: {fileID: 6069204533621919584, guid: c7f56e6c50b261044b0420bbcd7f1f1f,
+        type: 3}
+      propertyPath: GridManager
+      value: 
+      objectReference: {fileID: 1789648934}
     - target: {fileID: 7478438020662008524, guid: c7f56e6c50b261044b0420bbcd7f1f1f,
         type: 3}
       propertyPath: m_Color.g

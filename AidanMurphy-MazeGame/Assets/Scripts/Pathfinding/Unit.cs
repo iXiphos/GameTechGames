@@ -16,9 +16,19 @@ public class Unit : MonoBehaviour
     void Start()
     {
         grid = GridManager.GetComponent<Grid>();
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);    
+        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound); 
+        
     }
 
+    private void Update()
+    {
+        if(grid.NodeFromWorldPosition(target.transform.position, true) == grid.NodeFromWorldPosition(gameObject.transform.position, true))
+        {
+            gameObject.GetComponent<ResetGame>().reset = true;
+            target.GetComponent<PlayerMovement>().enabled = false;
+            Destroy(target.gameObject);
+        }
+    }
     //If a path is found by PathFinding, start to move across path
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -51,7 +61,16 @@ public class Unit : MonoBehaviour
         //If the path exist and is not 0, set current waypoint. Else kill player
         if (path.Length > 0)
         {
-            currentWaypoint = path[0];
+            try
+            {
+                currentWaypoint = path[0];
+            }
+            catch
+            {
+                gameObject.GetComponent<ResetGame>().reset = true;
+                target.GetComponent<PlayerMovement>().enabled = false;
+                Destroy(target.gameObject);
+            }
         }
         else
         {
@@ -100,5 +119,4 @@ public class Unit : MonoBehaviour
     //        }
     //    }
     //}
-
 }
