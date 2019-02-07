@@ -5,23 +5,23 @@ using System;
 
 public class PathRequestManager : MonoBehaviour
 {
+    Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>(); //Creating a Queue of PathRequests
 
-    Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
+    PathRequest currentPathRequest; //Current path
 
-    PathRequest currentPathRequest;
+    static PathRequestManager instance; //Instance of pathrequest manager
 
-    static PathRequestManager instance;
+    Pathfinding pathfinding; //Pathfinding script
 
-    Pathfinding pathfinding;
-
-    bool isProcessingPath;
+    bool isProcessingPath; //Is the path being created
 
     private void Awake()
     {
-        instance = this;
-        pathfinding = GetComponent<Pathfinding>();
+        instance = this; //Create instance of pathrequest manager
+        pathfinding = GetComponent<Pathfinding>(); //Get Pathfinding Script
     }
 
+    //Get path
     public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callBack)
     {
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callBack);
@@ -29,6 +29,7 @@ public class PathRequestManager : MonoBehaviour
         instance.TryProcessNext();
     }
 
+    //Try the next option
     void TryProcessNext()
     {
         if(!isProcessingPath && pathRequestQueue.Count > 0)
@@ -38,7 +39,6 @@ public class PathRequestManager : MonoBehaviour
             pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
     }
-
     public void FinishedProcessingPath(Vector3[] path, bool success)
     {
         currentPathRequest.callBack(path, success);
@@ -46,6 +46,7 @@ public class PathRequestManager : MonoBehaviour
         TryProcessNext();
     }
 
+    //Date structure of path requests
     struct PathRequest
     {
         public Vector3 pathStart;

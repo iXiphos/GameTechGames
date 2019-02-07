@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Unit : MonoBehaviour
 {
-
+    Grid grid;
     public Transform target;
     public float speed = 5;
     Vector3[] path;
@@ -21,9 +21,10 @@ public class Unit : MonoBehaviour
     void Update()
     {
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        if (target.transform.position == gameObject.transform.position)
+        if (target.position == gameObject.transform.position)
         {
             gameObject.GetComponent<ResetGame>().reset = true;
+            gameObject.GetComponent<Unit>().enabled = false;
         }
     }
 
@@ -36,14 +37,31 @@ public class Unit : MonoBehaviour
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
+        else
+        {
+            gameObject.GetComponent<ResetGame>().reset = true;
+        }
     }
 
     IEnumerator FollowPath()
     {
+        if (target.position == gameObject.transform.position)
+        {
+            gameObject.GetComponent<ResetGame>().reset = true;
+        }
         Vector3 currentWaypoint = new Vector3(0, 0, 0);
         if (path.Length >= 0)
         {
-            currentWaypoint = path[0];
+            try
+            {
+                currentWaypoint = path[0];
+            }
+            catch
+            {
+                gameObject.GetComponent<ResetGame>().reset = true;
+                target.GetComponent<PlayerMovement>().enabled = false;
+                Destroy(target.gameObject);
+            }
         }
         else
         {

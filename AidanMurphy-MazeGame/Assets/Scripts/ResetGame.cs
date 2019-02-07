@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ResetGame : MonoBehaviour
 {
 
+    Grid grid;
     public bool reset;
     bool faded = false;
 
@@ -27,13 +28,13 @@ public class ResetGame : MonoBehaviour
         if (reset)
         {
             FadeToBlack();
-            if(Input.GetKeyDown(KeyCode.Backspace)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if(Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     
     void FadeToBlack()
     {
-        BlackFade.CrossFadeAlpha(1.0f, 1.0f, false);
-        LoseText.CrossFadeAlpha(1.0f, 1.2f, false);
+        BlackFade.CrossFadeAlpha(1.0f, 0.5f, false);
+        LoseText.CrossFadeAlpha(1.0f, 0.6f, false);
     }
 }
