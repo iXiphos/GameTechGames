@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public Transform startPosition;
+    public Transform startPosition; //Where the grid should start
 
-    public LayerMask WallMask;
-    public Vector3 gridWorldSize;
-    public float nodeRadius;
+    public LayerMask WallMask; // What layermask should be considered wall
+    public Vector3 gridWorldSize; //How large the grid should be
+    public float nodeRadius; //Radius of each node
     public float Distance;
-    public List<Node> FinalPath;
+    public List<Node> FinalPath; //List for final path
 
     Node[,] grid;
 
@@ -18,9 +18,6 @@ public class Grid : MonoBehaviour
     int gridSizeX, gridSizeY;
 
     int x = 0, y = 0;
-
-    public GameObject cicle;
-
     public void Awake()
     {
         nodeDiameter = nodeRadius * 2;
@@ -29,6 +26,7 @@ public class Grid : MonoBehaviour
         CreateGrid(); 
     }
 
+    //Max Size of Grid
     public int MaxSize
     {
         get
@@ -37,11 +35,14 @@ public class Grid : MonoBehaviour
         }
     }
 
-    //Generate a gridq
+    //Generate a grid that is made out of nodes
     void CreateGrid()
     {
+        //Starting Node
         grid = new Node[gridSizeX, gridSizeY];
+        //Vector Math to find bottom left location in grid
         Vector2 bottomLeft = new Vector2(transform.position.x, transform.position.y) - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
+        //Loop through the points one by one and create a node and figure out if the node is a wall
         for (y = 0; y < gridSizeY; y++)
         {
             for (x = 0; x < gridSizeX; x++)
@@ -51,11 +52,9 @@ public class Grid : MonoBehaviour
                 if(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask))
                 {
                     Wall = true;
-                    Debug.Log(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask).name);
                 }
+                //Create Node in Grid
                 grid[x, y] = new Node(Wall, worldPoint, x, y);
-                //if (Wall)
-                //GameObject.Instantiate(cicle, grid[x,y].Position, Quaternion.Euler(0, 0, 0));
             }
         }
     }
@@ -80,11 +79,8 @@ public class Grid : MonoBehaviour
         List<Node> NeighboringNodes = new List<Node>();
         int xCheck, yCheck;
 
-
         xCheck = a_Node.gridX + 1;
-
         yCheck = a_Node.gridY;
-
         //Get Right Node
         if(xCheck >= 0 && xCheck < gridSizeX)
         {
@@ -95,7 +91,6 @@ public class Grid : MonoBehaviour
         }
 
         xCheck = a_Node.gridX - 1;
-
         yCheck = a_Node.gridY;
         //Get Left Node
         if (xCheck >= 0 && xCheck < gridSizeX)
@@ -107,7 +102,6 @@ public class Grid : MonoBehaviour
         }
 
         xCheck = a_Node.gridX;
-
         yCheck = a_Node.gridY + 1;
         //Get Up Load
         if (xCheck >= 0 && xCheck < gridSizeX)
@@ -118,7 +112,6 @@ public class Grid : MonoBehaviour
             }
         }
         xCheck = a_Node.gridX;
-
         yCheck = a_Node.gridY - 1;
         //Get Down Node
         if (xCheck >= 0 && xCheck < gridSizeX)

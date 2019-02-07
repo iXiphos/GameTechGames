@@ -6,30 +6,23 @@ using UnityEngine.SceneManagement;
 public class Unit : MonoBehaviour
 {
     Grid grid;
-    public Transform target;
-    public float speed = 5;
-    Vector3[] path;
-    int targetIndex;
+    public GameObject GridManager; //Grid Manager Object
+    public Transform target; //Player
+    public float speed = 5; //How fast the enemy should move
+    Vector3[] path; //Array of the path enemy should take
+    int targetIndex; //Current target location in path
 
     // Start is called before the first frame update
     void Start()
     {
+        grid = GridManager.GetComponent<Grid>();
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        if (target.position == gameObject.transform.position)
-        {
-            gameObject.GetComponent<ResetGame>().reset = true;
-            gameObject.GetComponent<Unit>().enabled = false;
-        }
-    }
-
+    //If a path is found by PathFinding, start to move across path
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
+        //If the path doesn't exist, reset the game
         if (pathSuccessful)
         {
             path = newPath;
@@ -43,33 +36,33 @@ public class Unit : MonoBehaviour
         }
     }
 
+    //Follow the path given
     IEnumerator FollowPath()
     {
+        //If the player and enemy positions are the same, kill player
         if (target.position == gameObject.transform.position)
         {
             gameObject.GetComponent<ResetGame>().reset = true;
         }
+
+        //Current node the enemy needs to move towards
         Vector3 currentWaypoint = new Vector3(0, 0, 0);
-        if (path.Length >= 0)
+
+        //If the path exist and is not 0, set current waypoint. Else kill player
+        if (path.Length > 0)
         {
-            try
-            {
-                currentWaypoint = path[0];
-            }
-            catch
-            {
-                gameObject.GetComponent<ResetGame>().reset = true;
-                target.GetComponent<PlayerMovement>().enabled = false;
-                Destroy(target.gameObject);
-            }
+            currentWaypoint = path[0];
         }
         else
         {
             gameObject.GetComponent<ResetGame>().reset = true;
+            target.GetComponent<PlayerMovement>().enabled = false;
+            Destroy(target.gameObject);
         }
-        Debug.Log(path[path.Length - 1]);
+        //Loop to move enemy from point to point
         while (true)
         {
+            //When at a point, move to next point
             if(transform.position == currentWaypoint)
             {
                 targetIndex++;
@@ -80,30 +73,32 @@ public class Unit : MonoBehaviour
                 currentWaypoint = path[targetIndex];
             }
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            if (target.transform.position.x != path[path.Length - 1].x || target.transform.position.y != path[path.Length - 1].y)
+            //If the player current node moves, calculate a new path for the enemies
+            if (grid.NodeFromWorldPosition(path[path.Length - 1], true) != grid.NodeFromWorldPosition(target.position, false))
             {
-                //Debug.Log("Change Position");
-                PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-                yield return null;
+                    PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+                    yield return null;
             }
             yield return null;
         }
     }
-    public void OnDrawGizmos()
-    {
-        if(path != null)
-        {
-            for(int i = targetIndex; i < path.Length; i++)
-            {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], new Vector3(0.5f, 0.5f, 0.5f));
 
-                if(i == targetIndex)
-                {
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-            }
-        }
-    }
+    //This is used to draw the path in the editor. I am leaving it here for future reference.
+    //public void OnDrawGizmos()
+    //{
+    //    if(path != null)
+    //    {
+    //        for(int i = targetIndex; i < path.Length; i++)
+    //        {
+    //            Gizmos.color = Color.black;
+    //            Gizmos.DrawCube(path[i], new Vector3(0.5f, 0.5f, 0.5f));
+
+    //            if(i == targetIndex)
+    //            {
+    //                Gizmos.DrawLine(transform.position, path[i]);
+    //            }
+    //        }
+    //    }
+    //}
 
 }

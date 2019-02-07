@@ -5,18 +5,21 @@ using System;
 
 public class Heap<T> where T : IHeapItem<T>
 {
+    //Array of Itmes
     T[] items;
     int currentItemCount;
 
-    int childIndexLeft;
-    int childIndexRight;
+    int childIndexLeft; //Left index of tree
+    int childIndexRight; //Right index of tree
     int swapIndex;
 
+    //Heap Object
     public Heap(int maxHeapSize)
     {
         items = new T[maxHeapSize];
     }
 
+    //Add to object to heap list
     public void Add(T item)
     {
         item.HeapIndex = currentItemCount;
@@ -25,9 +28,11 @@ public class Heap<T> where T : IHeapItem<T>
         currentItemCount++;
     }
 
+    //Sort the Heap up
     void SortUp(T item)
     {
         int parentIndex = (item.HeapIndex - 1) / 2;
+        //While unsorted, sort it
         while (true)
         {
             T parentItem = items[parentIndex];
@@ -43,6 +48,7 @@ public class Heap<T> where T : IHeapItem<T>
         }
     }
 
+    //Remove the first index of heap
     public T RemoveFirst()
     {
         T firstItem = items[0];
@@ -53,6 +59,7 @@ public class Heap<T> where T : IHeapItem<T>
         return firstItem;
     }
 
+    //Get the size of heap list
     public int Count
     {
         get
@@ -61,18 +68,22 @@ public class Heap<T> where T : IHeapItem<T>
         }
     }
 
+    //Modifty item
     public void UpdateItem(T item)
     {
         SortUp(item);
     }
 
+    //check if item is in heap list
     public bool Contains(T item)
     {
         return Equals(items[item.HeapIndex], item);
     }
 
+    //Sort the heap list down
     void SortDown(T item)
     {
+        //While Unsorted, sort it
         while (true)
         {
             childIndexLeft = item.HeapIndex * 2 + 1;
@@ -102,6 +113,7 @@ public class Heap<T> where T : IHeapItem<T>
         }
     }
 
+    //Swap the two items in a heap list
     void Swap(T itemA, T itemB)
     {
         items[itemA.HeapIndex] = itemB;
@@ -113,7 +125,7 @@ public class Heap<T> where T : IHeapItem<T>
 
 }
 
-
+//Interface for Heap Item
 public interface IHeapItem<T> : IComparable<T>
 {
     int HeapIndex

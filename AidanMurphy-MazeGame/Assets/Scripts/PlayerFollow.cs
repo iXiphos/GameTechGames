@@ -13,6 +13,7 @@ public class PlayerFollow : MonoBehaviour
         CameraFollow();    
     }
 
+    //Have Camera Follow Player
     void CameraFollow()
     {
         Vector3 camPosition = transform.position;//get the players position in worlds space

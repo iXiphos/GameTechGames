@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CoinsCollected.cs" />
+    <Compile Include="Assets\Scripts\CoinsCollected.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Grid.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\PlayerFollow.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ResetGame.cs" />
+    <Compile Include="Assets\Scripts\StartScreen.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphy-MazeGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

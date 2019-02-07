@@ -5,52 +5,44 @@ using UnityEngine;
 //The way my movement works, was causing on trigger enter to break. I had to make my own collision using the system I was using
 public class Collectable : MonoBehaviour
 {
-    Grid grid;
+    Grid grid; //Grid Component
 
-    Node StartNode;
+    Node StartNode; //Node of GameObject
+     
+    Node PlayerNode; //Player Node
 
-    Node PlayerNode;
+    public GameObject player; //Get Player
 
-    public GameObject player;
+    public GameObject Enemy; //Get Enemy
 
-    public GameObject Enemy;
 
-    public GameObject Wall;
+    public GameObject GridManager; //Get A* manager
 
-    public GameObject gameManager;
-
-    public bool openExit;
-
+    public GameObject text;
 
     // Start is called before the first frame update
     void Start()
     {
-        grid = gameManager.GetComponent<Grid>();
+        //Get Grid
+        grid = GridManager.GetComponent<Grid>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Get Player Node and Current Node
         StartNode = grid.NodeFromWorldPosition(transform.position, true);
         PlayerNode = grid.NodeFromWorldPosition(player.transform.position, true);
+
+        //Make sure it is on a node
         transform.position = StartNode.Position;
+
+        //Simulate collision by testing if player and object are on same node
         if (PlayerNode == StartNode)
         {
-            openExit = true;
+            Enemy.SetActive(true);
+            text.GetComponent<CoinsCollected>().coinsCollected++;
             gameObject.SetActive(false);
         }
-
-        if (openExit)
-        {
-            UnlockExit();
-        }
-
     }
-
-    void UnlockExit()
-    {
-        Enemy.SetActive(true);
-        Destroy(Wall);
-    }
-
 }

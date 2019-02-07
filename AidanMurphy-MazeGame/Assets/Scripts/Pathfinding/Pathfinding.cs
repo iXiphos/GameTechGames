@@ -7,61 +7,72 @@ public class Pathfinding : MonoBehaviour
 {
     Grid grid; //Grid script
 
-    PathRequestManager requestManager;
+    PathRequestManager requestManager; //Request Manager
     private void Awake()
     {
         grid = GetComponent<Grid>(); //Get Grid Component
-        requestManager = GetComponent<PathRequestManager>();
+        requestManager = GetComponent<PathRequestManager>(); //Get Request Manager
     }
 
+    //Start to Find the Path between two points
     public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     {
         StartCoroutine(FindPath(startPos, targetPos));
     }
 
-
     IEnumerator FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
     {
-
+        //Points to keep track off
         Vector3[] wayPoints = new Vector3[0];
-
+        //Is it possible
         bool pathSuccess = false;
 
+        //Get start and end nodes
         Node StartNode = grid.NodeFromWorldPosition(a_StartPos, true);
         Node TargetNode = grid.NodeFromWorldPosition(a_TargetPos, false);
 
-
+        //Check if the nodes are walls or not
         if (!StartNode.isWall && !TargetNode.isWall)
         {
-            //Debug.Log("working");
+            //Use the Heap sorting algorithem to Efficiently search the nodes
             Heap<Node> OpenList = new Heap<Node>(grid.MaxSize);
+
+            //HashSet of Checked Nodes
             HashSet<Node> ClosedList = new HashSet<Node>();
 
+            //Add StartNode
             OpenList.Add(StartNode);
 
+            //Loop through Nieghboring Nodes and calculate and compare the cost of each action
             while (OpenList.Count > 0)
             {
+                //Current Node being checked
                 Node CurrentNode = OpenList.RemoveFirst();
 
+                //Add to Checked List
                 ClosedList.Add(CurrentNode);
 
+                //Check if last node
                 if (CurrentNode == TargetNode)
                 {
                     pathSuccess = true;
                     break;
                 }
 
+                //Loop through all neighboring Nodes
                 foreach (Node NeighborNode in grid.GetNeighboringNodes(CurrentNode))
                 {
+                    //Check if wall or if already checked
                     if (NeighborNode.isWall || ClosedList.Contains(NeighborNode))
                     {
                         continue;
                     }
-                    int MoveCost = CurrentNode.gCost + GetmanhattenDistance(CurrentNode, NeighborNode);
+                    //Calculate move cost for the nodes
+                    int MoveCost = CurrentNode.gCost + GetManhattenDistance(CurrentNode, NeighborNode);
                     if (MoveCost < NeighborNode.gCost || !OpenList.Contains(NeighborNode))
                     {
                         NeighborNode.gCost = MoveCost;
-                        NeighborNode.hCost = GetmanhattenDistance(NeighborNode, TargetNode);
+                        NeighborNode.hCost = GetManhattenDistance(NeighborNode, TargetNode);
                         NeighborNode.Parent = CurrentNode;
                         if (!OpenList.Contains(NeighborNode))
                         {
@@ -78,11 +89,12 @@ public class Pathfinding : MonoBehaviour
             }
         }
         yield return null;
+        //If path was a success, get the final path
         if (pathSuccess)
         {
             wayPoints = GetFinalPath(StartNode, TargetNode);
         }
-        Debug.Log(pathSuccess);
+        //Process the final path so Unit can move
         requestManager.FinishedProcessingPath(wayPoints, pathSuccess);
     }
 
@@ -101,6 +113,7 @@ public class Pathfinding : MonoBehaviour
         return waypoints;
     }
 
+    //Used for optimizing paths but can cause clipping
     Vector3[] SimplifyPath(List<Node> path)
     {
         List<Vector3> waypoints = new List<Vector3>();
@@ -117,6 +130,7 @@ public class Pathfinding : MonoBehaviour
         return waypoints.ToArray();
     }
 
+    //Get all Nodes in the path
     Vector3[] VectorPath(List<Node> path)
     {
         List<Vector3> waypoints = new List<Vector3>();
@@ -127,7 +141,8 @@ public class Pathfinding : MonoBehaviour
         return waypoints.ToArray();
     }
 
-    public int GetmanhattenDistance(Node nodeA, Node nodeB)
+    //Get the distance between two nodes
+    public int GetManhattenDistance(Node nodeA, Node nodeB)
     {
         int ix = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int iy = Mathf.Abs(nodeA.gridY - nodeB.gridY);

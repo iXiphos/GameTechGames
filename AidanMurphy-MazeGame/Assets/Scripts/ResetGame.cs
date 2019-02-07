@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class ResetGame : MonoBehaviour
 {
+    public bool reset; //Variable to tell to reset
 
-    Grid grid;
-    public bool reset;
-    bool faded = false;
+    public Image BlackFade; //Black Screen for Fade
+    public Text LoseText; //Text to display
 
-    public Image BlackFade;
-    public Text LoseText;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        //Turn of object and hide the text and black screen
+        gameObject.SetActive(false);
         BlackFade.canvasRenderer.SetAlpha(0.0f);
         LoseText.canvasRenderer.SetAlpha(0.0f);
         reset = false;
-        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,10 +27,12 @@ public class ResetGame : MonoBehaviour
         if (reset)
         {
             FadeToBlack();
+            //If input is enter, reset scene
             if(Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     
+    //Fade the text and black screen in
     void FadeToBlack()
     {
         BlackFade.CrossFadeAlpha(1.0f, 0.5f, false);

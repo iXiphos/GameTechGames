@@ -46,7 +46,7 @@ public class PathRequestManager : MonoBehaviour
         TryProcessNext();
     }
 
-    //Date structure of path requests
+    //Data structure for path requests
     struct PathRequest
     {
         public Vector3 pathStart;
