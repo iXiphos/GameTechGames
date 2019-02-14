@@ -58,6 +58,7 @@ public class FullAutoFire : State<PlayerShooting>
         float randomZ = Random.Range(-randomRange, randomRange);
         GameObject bullet = GameObject.Instantiate(_owner.bulletPrefab, _owner.bulletSpawn.transform.position, Quaternion.Euler(0, 0, randomZ));
         bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * _owner.bulletSpeed);
+        bullet.GetComponent<Damage>().damageAmount = 2;
         GameObject.Destroy(bullet, 2.5f);
     }
 }

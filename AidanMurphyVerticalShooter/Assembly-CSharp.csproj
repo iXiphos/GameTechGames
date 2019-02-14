@@ -61,12 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Damage.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting\DefaultFire.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting\FullAutoFire.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting\PlayerShooting.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting\ShotGunFire.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting\StateStuff.cs" />
+    <Compile Include="Assets\Scripts\EnemyStatus.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShooting\DefaultFire.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShooting\FullAutoFire.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShooting\PlayerShooting.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShooting\ShotGunFire.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerShooting\StateStuff.cs" />
     <Compile Include="Assets\Scripts\UpgradeWeapon.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

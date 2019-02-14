@@ -8,6 +8,7 @@ public class ShotGunFire : State<PlayerShooting>
     private static ShotGunFire _instance;
 
     float spreadAngle = 10;
+    int damageAmount = 4;
 
     private ShotGunFire()
     {
@@ -61,6 +62,9 @@ public class ShotGunFire : State<PlayerShooting>
         bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * _owner.bulletSpeed);
         bullet1.GetComponent<Rigidbody2D>().AddForce(bullet1.transform.up * _owner.bulletSpeed);
         bullet2.GetComponent<Rigidbody2D>().AddForce(bullet2.transform.up * _owner.bulletSpeed);
+        bullet.GetComponent<Damage>().damageAmount = damageAmount;
+        bullet1.GetComponent<Damage>().damageAmount = damageAmount;
+        bullet2.GetComponent<Damage>().damageAmount = damageAmount;
         GameObject.Destroy(bullet, 3f);
         GameObject.Destroy(bullet1, 3f);
         GameObject.Destroy(bullet2, 3f);

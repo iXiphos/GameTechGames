@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
+    public int damageAmount { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<EnemyStatus>().health -= damageAmount;
+            Destroy(gameObject);
         }
     }
 }
