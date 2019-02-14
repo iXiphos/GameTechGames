@@ -62,8 +62,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Damage.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\PlayerShooting.cs" />
-    <Compile Include="Assets\UpgradeWeapon.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting\DefaultFire.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting\FullAutoFire.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting\PlayerShooting.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting\ShotGunFire.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting\StateStuff.cs" />
+    <Compile Include="Assets\Scripts\UpgradeWeapon.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aemur/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
