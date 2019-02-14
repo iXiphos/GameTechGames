@@ -52,7 +52,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (ammoCount == 0)
         {

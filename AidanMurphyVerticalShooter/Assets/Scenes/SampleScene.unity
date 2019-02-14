@@ -301,10 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd0ff0f3c8baee459ef7e4e3ef74d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorsList:
-  - {r: 0, g: 1, b: 0.91210127, a: 1}
-  - {r: 0.19723403, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.046734557, b: 0, a: 1}
   newWeapon: 0
 --- !u!60 &310323531
 PolygonCollider2D:
@@ -427,9 +423,9 @@ GameObject:
   - component: {fileID: 407002520}
   - component: {fileID: 407002519}
   - component: {fileID: 407002521}
-  - component: {fileID: 407002522}
   - component: {fileID: 407002523}
   - component: {fileID: 407002524}
+  - component: {fileID: 407002522}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -474,7 +470,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b8885b670fad6fb4ab261eaacfce17e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b80ce21b324edf34ba867bc6d45e44a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -493,7 +489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407002518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.06, y: -4.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 781647558}
@@ -538,7 +534,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 1.28, y: 1.39}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -546,13 +542,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.02, y: 0.64}
-      - {x: -0.64, y: -0.56}
-      - {x: -0.64, y: -0.63}
-      - {x: -0.62, y: -0.64}
-      - {x: 0.64, y: -0.64}
-      - {x: 0.64, y: -0.52}
-      - {x: 0.06, y: 0.64}
+    - - {x: 0.64, y: -0.255}
+      - {x: 0.64, y: 0.155}
+      - {x: 0.53999996, y: 0.345}
+      - {x: 0.34, y: 0.525}
+      - {x: 0.17, y: 0.59499997}
+      - {x: 0.07, y: 0.695}
+      - {x: -0.12, y: 0.695}
+      - {x: -0.26999998, y: 0.585}
+      - {x: -0.55, y: 0.355}
+      - {x: -0.62, y: 0.175}
+      - {x: -0.64, y: 0.114999995}
+      - {x: -0.64, y: -0.255}
+      - {x: -0.59999996, y: -0.36499998}
+      - {x: -0.45, y: -0.555}
+      - {x: -0.31, y: -0.655}
+      - {x: -0.19, y: -0.695}
+      - {x: 0.17, y: -0.695}
+      - {x: 0.28, y: -0.655}
+      - {x: 0.39, y: -0.60499996}
+      - {x: 0.55, y: -0.45499998}
 --- !u!114 &407002523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,7 +967,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781647557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.91, z: 0}
+  m_LocalPosition: {x: -0.032, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 407002520}
@@ -1792,10 +1801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd0ff0f3c8baee459ef7e4e3ef74d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorsList:
-  - {r: 1, g: 0, b: 0.69019794, a: 1}
-  - {r: 0.8117182, g: 1, b: 0, a: 1}
-  - {r: 0.80887604, g: 0, b: 1, a: 1}
   newWeapon: 1
 --- !u!1 &1509513905
 GameObject:
