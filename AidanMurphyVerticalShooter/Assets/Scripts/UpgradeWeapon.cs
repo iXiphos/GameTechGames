@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpgradeWeapon : MonoBehaviour
 {
-
+    public int newWeapon;
     Color[] ColorsList;
     private void Start()
     {
@@ -19,7 +19,6 @@ public class UpgradeWeapon : MonoBehaviour
         StartCoroutine(ChangeColorAfterTime(0.5f));
     }
 
-    public int newWeapon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")

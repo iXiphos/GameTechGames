@@ -32,9 +32,9 @@ public class FullAutoFire : State<PlayerShooting>
 
     public override void enterState(PlayerShooting _owner)
     {
-        _owner.ammoCount = 50;
+        _owner.ammoCount = 100;
         _owner.bulletText.text = "Ammo: " + _owner.ammoCount;
-        _owner.attackRate = 0.1f;
+        _owner.attackRate = 0.075f;
         _owner.bulletSpeed = 800;
     }
 
@@ -58,7 +58,7 @@ public class FullAutoFire : State<PlayerShooting>
         float randomZ = Random.Range(-randomRange, randomRange);
         GameObject bullet = GameObject.Instantiate(_owner.bulletPrefab, _owner.bulletSpawn.transform.position, Quaternion.Euler(0, 0, randomZ));
         bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * _owner.bulletSpeed);
-        bullet.GetComponent<Damage>().damageAmount = 2;
+        bullet.GetComponent<Damage>().damageAmount = 4;
         GameObject.Destroy(bullet, 2.5f);
     }
 }

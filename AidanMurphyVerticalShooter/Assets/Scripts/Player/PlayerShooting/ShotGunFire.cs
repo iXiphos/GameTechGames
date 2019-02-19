@@ -8,7 +8,7 @@ public class ShotGunFire : State<PlayerShooting>
     private static ShotGunFire _instance;
 
     float spreadAngle = 10;
-    int damageAmount = 4;
+    int damageAmount = 6;
 
     private ShotGunFire()
     {
@@ -33,10 +33,10 @@ public class ShotGunFire : State<PlayerShooting>
 
     public override void enterState(PlayerShooting _owner)
     {
-        _owner.ammoCount = 20;
+        _owner.ammoCount = 50;
         _owner.bulletText.text = "Ammo: " + _owner.ammoCount;
-        _owner.attackRate = 0.3f;
-        _owner.bulletSpeed = 1000;
+        _owner.attackRate = 0.2f;
+        _owner.bulletSpeed = 1100;
     }
 
     public override void exitState(PlayerShooting _owner)
