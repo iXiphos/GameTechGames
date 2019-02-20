@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public GameObject enemy;
     public List<GameObject> activeEnemyList;
 
-    public Transform[] enemySpawns;
-
     private int waveCount = 0;
 
     public Sprite[] meteorSprites;
@@ -149,12 +147,12 @@ public class GameManager : MonoBehaviour
             
             while(i < (tempSmall + tempMedium + tempLarge))
             {
-                int rand = Random.Range(0, enemySpawns.Length);
                 int rand2 = Random.Range(0, 3);
                 int rand3 = Random.Range(0, 4);
-                if(rand2 == 0 && enemyCountSmall != 0)
+                Vector3 spawnLoc = new Vector3(Random.Range(-4f, 4f), 11.5f, 0f);
+                if (rand2 == 0 && enemyCountSmall != 0)
                 {
-                    GameObject meteorite = Instantiate(enemy, enemySpawns[rand].position, Quaternion.Euler(0, 0, 0));
+                    GameObject meteorite = Instantiate(enemy, spawnLoc, Quaternion.Euler(0, 0, 0));
                     meteorite.GetComponent<SpriteRenderer>().sprite = meteorSprites[rand3];
                     meteorite.name = "meterorite" + enemyCountSmall;
                     meteorite.GetComponent<EnemyStatus>().size = 0;
@@ -165,7 +163,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if (rand2 == 1 && enemyCountMedium != 0)
                 {
-                    GameObject meteorite = Instantiate(enemy, enemySpawns[rand].position, Quaternion.Euler(0, 0, 0));
+                    GameObject meteorite = Instantiate(enemy, spawnLoc, Quaternion.Euler(0, 0, 0));
                     meteorite.GetComponent<SpriteRenderer>().sprite = meteorSprites[rand3];
                     meteorite.name = "meterorite" + enemyCountMedium;
                     meteorite.GetComponent<EnemyStatus>().manager = gameObject;
@@ -176,7 +174,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if (rand2 == 2 && enemyCountLarge != 0)
                 {
-                    GameObject meteorite = Instantiate(enemy, enemySpawns[rand].position, Quaternion.Euler(0, 0, 0));
+                    GameObject meteorite = Instantiate(enemy, spawnLoc, Quaternion.Euler(0, 0, 0));
                     meteorite.GetComponent<SpriteRenderer>().sprite = meteorSprites[rand3];
                     meteorite.name = "meterorite" + enemyCountMedium;
                     meteorite.GetComponent<EnemyStatus>().manager = gameObject;

@@ -18,9 +18,12 @@ public class EnemyStatus : MonoBehaviour
 
     public GameObject drop;
 
+    public GameObject particleSystem;
+
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.Find("GameManager");
         switch (size)
         {
             case 0: //Small
@@ -50,6 +53,7 @@ public class EnemyStatus : MonoBehaviour
             int rand3 = Random.Range(0, 4);
             if (size == 1)
             {
+                StartCoroutine(SpawnParticles());
                 GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 15));
                 rand3 = Random.Range(0, 4);
                 enemy.GetComponent<SpriteRenderer>().sprite = manager.GetComponent<GameManager>().meteorSprites[rand3];
@@ -63,6 +67,7 @@ public class EnemyStatus : MonoBehaviour
             }
             else if(size == 2)
             {
+                StartCoroutine(SpawnParticles());
                 GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 15));
                 manager.GetComponent<GameManager>().AddEnemy(enemy);
                 enemy.GetComponent<EnemyStatus>().size = 1;
@@ -78,6 +83,13 @@ public class EnemyStatus : MonoBehaviour
             dropItem();
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator SpawnParticles()
+    {
+        GameObject particleSystems = Instantiate(particleSystem, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.Euler(0, 0, 15));
+        yield return null;
+        Destroy(particleSystem);
     }
 
     private void dropItem()

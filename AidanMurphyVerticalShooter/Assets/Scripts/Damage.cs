@@ -19,7 +19,7 @@ public class Damage : MonoBehaviour
         {
             collision.GetComponent<EnemyStatus>().health -= damageAmount;
             source.Play(0);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.03f);
         }
     }
 }

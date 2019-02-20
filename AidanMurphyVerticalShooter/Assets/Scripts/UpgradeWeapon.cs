@@ -6,6 +6,8 @@ public class UpgradeWeapon : MonoBehaviour
 {
     public int newWeapon;
     Color[] ColorsList;
+    public AudioSource source;
+
     private void Start()
     {
         ColorsList = new Color[7];
@@ -31,7 +33,8 @@ public class UpgradeWeapon : MonoBehaviour
             {
                 collision.GetComponent<PlayerShooting>().stateMachine.ChangeState(FullAutoFire.Instance);
             }
-            Destroy(gameObject);
+            source.Play();
+            Destroy(gameObject, 0.1f);
         }
     }
     IEnumerator ChangeColorAfterTime(float delayTime)

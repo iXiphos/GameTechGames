@@ -117,7 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   size: 0
+  manager: {fileID: 0}
   drop: {fileID: 6927923532658770417, guid: 28d785e3aa3703a4abe76bfc43bfdfaa, type: 3}
+  particleSystem: {fileID: 8508169924461200420, guid: efc1698d3eb422c48b44b12d6a058d2d,
+    type: 3}
 --- !u!58 &2693361033713269505
 CircleCollider2D:
   m_ObjectHideFlags: 0

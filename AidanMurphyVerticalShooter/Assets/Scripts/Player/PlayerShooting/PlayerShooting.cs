@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
+    public AudioSource source;
+
     //Screen Shake Stuff
     public float shakeLength;
     public Transform camTransform;
@@ -62,6 +64,8 @@ public class PlayerShooting : MonoBehaviour
         {
             stateMachine.Update();
             shakeDuration = shakeLength;
+            source.Play(0);
+
         }
         ScreenShake();
     }
