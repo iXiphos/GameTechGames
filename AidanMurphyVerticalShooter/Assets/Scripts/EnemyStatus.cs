@@ -10,8 +10,8 @@ public class EnemyStatus : MonoBehaviour
 
     float speed = 100;
 
-    float boundsLeft = -4.5f;
-    float boundsRight = 4.5f;
+    float boundsLeft = -5.1f;
+    float boundsRight = 5.1f;
     float boundsDown = -11f;
 
     public GameObject manager;
@@ -25,17 +25,17 @@ public class EnemyStatus : MonoBehaviour
         {
             case 0: //Small
                 gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-                health = 5f;
+                health = 6f;
                 speed = 300;
                 break;
             case 1: //Medium
                 gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-                health = 11f;
+                health = 10f;
                 speed = 250;
                 break;
             case 2: //Large
                 gameObject.transform.localScale = new Vector3(2f, 2f, 1f);
-                health = 17f;
+                health = 14f;
                 speed = 200;
                 break;
         }
@@ -50,24 +50,28 @@ public class EnemyStatus : MonoBehaviour
             int rand3 = Random.Range(0, 4);
             if (size == 1)
             {
-                GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 10));
+                GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 15));
+                rand3 = Random.Range(0, 4);
                 enemy.GetComponent<SpriteRenderer>().sprite = manager.GetComponent<GameManager>().meteorSprites[rand3];
                 manager.GetComponent<GameManager>().AddEnemy(enemy);
                 enemy.GetComponent<EnemyStatus>().size = 0;
-                GameObject enemy1 = Instantiate(gameObject, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, -10));
+                GameObject enemy1 = Instantiate(gameObject, new Vector3(gameObject.transform.position.x - 1f, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, -15));
+                rand3 = Random.Range(0, 4);
                 enemy1.GetComponent<SpriteRenderer>().sprite = manager.GetComponent<GameManager>().meteorSprites[rand3];
                 manager.GetComponent<GameManager>().AddEnemy(enemy1);
                 enemy1.GetComponent<EnemyStatus>().size = 0;
             }
             else if(size == 2)
             {
-                GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 15));
+                GameObject enemy = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + 1f, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, 15));
                 manager.GetComponent<GameManager>().AddEnemy(enemy);
                 enemy.GetComponent<EnemyStatus>().size = 1;
+                rand3 = Random.Range(0, 4);
                 enemy.GetComponent<SpriteRenderer>().sprite = manager.GetComponent<GameManager>().meteorSprites[rand3];
-                GameObject enemy1 = Instantiate(gameObject, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, -15));
+                GameObject enemy1 = Instantiate(gameObject, new Vector3(gameObject.transform.position.x - 1f, gameObject.transform.position.y - 0.5f), Quaternion.Euler(0, 0, -15));
                 manager.GetComponent<GameManager>().AddEnemy(enemy1);
                 enemy1.GetComponent<EnemyStatus>().size = 1;
+                rand3 = Random.Range(0, 4);
                 enemy1.GetComponent<SpriteRenderer>().sprite = manager.GetComponent<GameManager>().meteorSprites[rand3];
             }
             manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
@@ -97,17 +101,22 @@ public class EnemyStatus : MonoBehaviour
 
     void movement()
     {
+        Vector2 maxPosX;
         if (transform.position.x < boundsLeft)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            transform.Rotate(-gameObject.transform.rotation.eulerAngles);
+            transform.Rotate(-2 * gameObject.transform.rotation.eulerAngles);
             gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * speed);
+            maxPosX = new Vector2(boundsLeft, transform.position.y);
+            transform.position = maxPosX;
         }
         else if (transform.position.x > boundsRight)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            transform.Rotate(-gameObject.transform.rotation.eulerAngles);
+            transform.Rotate(-2 * transform.rotation.eulerAngles);
             gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * speed);
+            maxPosX = new Vector2(boundsRight, transform.position.y);
+            transform.position = maxPosX;
         }
 
         if (transform.position.y < boundsDown)
@@ -123,14 +132,15 @@ public class EnemyStatus : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().Health--;
+            manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
+            collision.gameObject.GetComponent<PlayerHealth>().doDamage();
             Destroy(gameObject);
         }
-        //else if(collision.gameObject.tag == "Enemy")
-        //{
-        //    gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        //    transform.Rotate(-gameObject.transform.rotation.eulerAngles);
-        //    gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * speed);
-        //}
+        else if(collision.gameObject.tag == "Enemy")
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            transform.Rotate(-2 * gameObject.transform.rotation.eulerAngles);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(-transform.up * speed);
+        }
     }
 }

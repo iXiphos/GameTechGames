@@ -49,7 +49,7 @@ public class DefaultFire : State<PlayerShooting>
         _owner.timeToNextAttack = Time.time + _owner.attackRate;
         GameObject bullet = Object.Instantiate(_owner.bulletPrefab, _owner.bulletSpawn.position, _owner.bulletSpawn.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * _owner.bulletSpeed);
-        bullet.GetComponent<Damage>().damageAmount = 7;
+        bullet.GetComponent<Damage>().damageAmount = 5;
         Object.Destroy(bullet, 3f);
     }
 
