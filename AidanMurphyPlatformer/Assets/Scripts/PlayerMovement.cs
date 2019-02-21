@@ -45,13 +45,13 @@ public class PlayerMovement : MonoBehaviour
             rgbd.AddForce(Vector2.up * jumpSpeed);
         }
 
-        if(rgbd.velocity.y < 0)
-        {
-            rgbd.gravityScale = defaultGravity * gravityIncreaseAmount * Time.deltaTime;
-        }else if(rgbd.velocity.y == 0)
-        {
-            rgbd.gravityScale = defaultGravity;
-        }
+        //if(rgbd.velocity.y < 0)
+        //{
+        //    rgbd.gravityScale = defaultGravity * gravityIncreaseAmount * Time.deltaTime;
+        //}else if(rgbd.velocity.y == 0)
+        //{
+        //    rgbd.gravityScale = defaultGravity;
+        //}
 
     }
 
