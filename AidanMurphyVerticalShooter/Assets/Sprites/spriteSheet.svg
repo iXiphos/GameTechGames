@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="499.49356"
-     inkscape:cy="662.82372"
+     inkscape:zoom="1.979899"
+     inkscape:cx="555.30683"
+     inkscape:cy="730.98866"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -55,7 +55,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -66,73 +66,82 @@
      transform="translate(0,-17.6)">
     <rect
        style="fill:#ffffff;stroke-width:0.26458332"
-       id="rect3715"
+       id="rect22"
        width="33.866665"
        height="33.866665"
        x="33.866665"
-       y="26.066664" />
-    <path
-       sodipodi:type="star"
-       style="fill:#ffffff;stroke-width:0.26458332"
-       id="path3723"
-       sodipodi:sides="3"
-       sodipodi:cx="118.30654"
-       sodipodi:cy="50.181545"
-       sodipodi:r1="19.73908"
-       sodipodi:r2="9.8695402"
-       sodipodi:arg1="0.5322095"
-       sodipodi:arg2="1.5794071"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="M 135.31547,60.197914 101.12765,59.903525 118.47651,30.443197 Z"
-       inkscape:transform-center-x="0.084984371"
-       inkscape:transform-center-y="-5.6019845"
-       transform="matrix(1,0,0,1.1524368,0,-9.1763781)" />
-    <path
-       sodipodi:type="star"
-       style="fill:#ffffff;stroke-width:0.26458332"
-       id="path3727"
-       sodipodi:sides="5"
-       sodipodi:cx="85.04464"
-       sodipodi:cy="114.05952"
-       sodipodi:r1="17.510744"
-       sodipodi:r2="8.755372"
-       sodipodi:arg1="-2.8232551"
-       sodipodi:arg2="-2.1949365"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 68.413687,108.57886 11.514315,-1.62403 5.189802,-10.405904 5.102665,10.448914 11.500341,1.72019 -8.360694,8.08181 1.917799,11.46905 -10.269858,-5.45408 -10.315076,5.36807 2.013573,-11.45262 z"
-       inkscape:transform-center-x="-0.022984327"
-       inkscape:transform-center-y="-1.7742237"
-       transform="matrix(1.0167996,0,0,1.0748897,-1.8296785,-9.9794477)" />
-    <circle
-       style="fill:#ffffff;stroke-width:0.26458332"
-       id="path32"
-       cx="152.96696"
-       cy="110.73333"
-       r="16.933332"
-       inkscape:export-filename="C:\Users\aidan.murphy\spaceShip.png"
+       y="59.933331"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerIdle.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
-    <circle
-       cy="110.32442"
-       cx="152.99857"
-       id="circle36"
-       style="fill:#ff0000;stroke-width:0.16614842"
-       r="10.633499"
-       inkscape:export-filename="C:\Users\aidan.murphy\spaceShip.png"
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+       id="rect27"
+       width="9.2207985"
+       height="9.2207985"
+       x="37"
+       y="64.074608"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerIdle.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       y="64.074608"
+       x="56"
+       height="9.2207985"
+       width="9.2207985"
+       id="rect29"
+       style="fill:#000000;stroke-width:0.26458332"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerIdle.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       y="59.666061"
+       x="91.195976"
+       height="33.866665"
+       width="33.866665"
+       id="rect31"
+       style="fill:#ffffff;stroke-width:0.26458332"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerWalk1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       y="63.807339"
+       x="102"
+       height="9.2207985"
+       width="9.2207985"
+       id="rect33"
+       style="fill:#000000;stroke-width:0.26458332"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerWalk1.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#000000;stroke-width:0.26458332"
+       id="rect35"
+       width="9.2207985"
+       height="9.2207985"
+       x="115"
+       y="63.807339"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerWalk1.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <rect
        style="fill:#ffffff;stroke-width:0.26458332"
-       id="rect38"
-       width="3.8742559"
-       height="6.8035712"
-       x="150.43454"
-       y="90.813988"
-       inkscape:export-filename="C:\Users\aidan.murphy\spaceShip.png"
+       id="rect37"
+       width="33.866665"
+       height="33.866665"
+       x="142.77899"
+       y="60.467869"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerWalkFull.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       y="64.609146"
+       x="164.91234"
+       height="9.2207985"
+       width="11.759859"
+       id="rect41"
+       style="fill:#000000;stroke-width:0.29879907"
+       inkscape:export-filename="C:\Users\aidan.murphy\source\repos\aidan-murphy\AidanMurphyPlatformer\Assets\playerWalkFull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
   </g>

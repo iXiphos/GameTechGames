@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D37EF193-62C1-3C3B-40BD-B54994CE42C7}</ProjectGuid>
+    <ProjectGuid>{625CB3B6-EC8B-EE10-5F98-93502B3ECED7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,31 +60,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Damage.cs" />
-    <Compile Include="Assets\Scripts\EnemyStatus.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting\DefaultFire.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting\FullAutoFire.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting\PlayerShooting.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting\ShotGunFire.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting\StateStuff.cs" />
-    <Compile Include="Assets\Scripts\UpgradeWeapon.cs" />
+    <Compile Include="Assets\Scripts\FloorDetection.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -288,13 +279,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.5f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyVerticalShooter/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/aidan.murphy/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.5f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
