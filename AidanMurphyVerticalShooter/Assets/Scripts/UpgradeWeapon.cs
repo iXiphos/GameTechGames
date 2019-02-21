@@ -10,6 +10,7 @@ public class UpgradeWeapon : MonoBehaviour
 
     private void Start()
     {
+        //Set the List of Colors
         ColorsList = new Color[7];
         ColorsList[0] = Color.red;
         ColorsList[1] = Color.yellow;
@@ -23,6 +24,7 @@ public class UpgradeWeapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //If Collidide with player, give them upgrade
         if(collision.tag == "Player")
         {
             if (newWeapon == 0)
@@ -33,10 +35,13 @@ public class UpgradeWeapon : MonoBehaviour
             {
                 collision.GetComponent<PlayerShooting>().stateMachine.ChangeState(FullAutoFire.Instance);
             }
+            //Play sound effect
             source.Play();
             Destroy(gameObject, 0.1f);
         }
     }
+
+    //Add the Fade Effect to the Object
     IEnumerator ChangeColorAfterTime(float delayTime)
     {
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -45,6 +50,7 @@ public class UpgradeWeapon : MonoBehaviour
 
         spriteRenderer.color = currentcolor;
 
+        //Update the color each frame
         while (true)
         {
             nextcolor = (Color)ColorsList[UnityEngine.Random.Range(0, ColorsList.Length)];

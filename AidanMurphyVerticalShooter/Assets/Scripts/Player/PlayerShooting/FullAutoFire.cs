@@ -3,12 +3,14 @@ using StateStuff;
 using System.Collections;
 using System.Collections.Generic;
 
+//Quickly Shoot straight, low damage but lots of bullets
 public class FullAutoFire : State<PlayerShooting>
 {
-    private static FullAutoFire _instance;
+    private static FullAutoFire _instance; //Creating an instance of fullauto fire
 
-    float randomRange = 10f;
+    float randomRange = 10f; //Spread of shot
 
+    //If instance already exists, break
     private FullAutoFire()
     {
         if (_instance != null)
@@ -30,6 +32,7 @@ public class FullAutoFire : State<PlayerShooting>
         }
     }
 
+    //What to do when this state is entered
     public override void enterState(PlayerShooting _owner)
     {
         _owner.ammoCount = 80;
@@ -38,6 +41,7 @@ public class FullAutoFire : State<PlayerShooting>
         _owner.bulletSpeed = 800;
     }
 
+    //What to do when this state is exited
     public override void exitState(PlayerShooting _owner)
     {
         _owner.attackRate = _owner.AttackSpeed;
@@ -45,12 +49,14 @@ public class FullAutoFire : State<PlayerShooting>
         _owner.ammoCount = 1000;
     }
 
+    //Update For this state
     public override void updateState(PlayerShooting _owner)
     {
         _owner.bulletText.text = "Ammo: " + _owner.ammoCount;
         Fire(_owner);
     }
 
+    //Fire Function
     void Fire(PlayerShooting _owner)
     {
         _owner.ammoCount--;
@@ -58,7 +64,7 @@ public class FullAutoFire : State<PlayerShooting>
         float randomZ = Random.Range(-randomRange, randomRange);
         GameObject bullet = GameObject.Instantiate(_owner.bulletPrefab, _owner.bulletSpawn.transform.position, Quaternion.Euler(0, 0, randomZ));
         bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * _owner.bulletSpeed);
-        bullet.GetComponent<Damage>().damageAmount = 2;
+        bullet.GetComponent<Damage>().damageAmount = 3;
         GameObject.Destroy(bullet, 2.5f);
     }
 }

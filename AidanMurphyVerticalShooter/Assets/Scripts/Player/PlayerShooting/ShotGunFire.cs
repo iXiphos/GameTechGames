@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 public class ShotGunFire : State<PlayerShooting>
 {
-    private static ShotGunFire _instance;
+    private static ShotGunFire _instance; //Creating Instance of Shotgun fire
 
-    float spreadAngle = 10;
-    int damageAmount = 5;
+    float spreadAngle = 10; //The spread of the weapon
+    int damageAmount = 5; //How much damage it does
 
+    //If instance already exists, break
     private ShotGunFire()
     {
         if (_instance != null)
@@ -31,14 +32,16 @@ public class ShotGunFire : State<PlayerShooting>
         }
     }
 
+    //What to do when state is entered
     public override void enterState(PlayerShooting _owner)
     {
-        _owner.ammoCount = 40;
+        _owner.ammoCount = 40; //Set ammo count
         _owner.bulletText.text = "Ammo: " + _owner.ammoCount;
-        _owner.attackRate = 0.225f;
-        _owner.bulletSpeed = 1100;
+        _owner.attackRate = 0.225f; //Set attack rate
+        _owner.bulletSpeed = 1100; //Set bullet speed
     }
 
+    //What to do when state is exited
     public override void exitState(PlayerShooting _owner)
     {
         _owner.attackRate = _owner.AttackSpeed;
@@ -46,12 +49,14 @@ public class ShotGunFire : State<PlayerShooting>
         _owner.ammoCount = 1000;
     }
 
+    //Update For this state
     public override void updateState(PlayerShooting _owner)
     {
         _owner.bulletText.text = "Ammo: " + _owner.ammoCount;
         FireShotGun(_owner);
     }
 
+    //Fire the shot gun in pattern of 3
     void FireShotGun(PlayerShooting _owner)
     {
         _owner.ammoCount--;

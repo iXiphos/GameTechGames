@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    public int damageAmount { get; set; }
+    public int damageAmount { get; set; } //How much damage it should do
 
-    public AudioSource source;
+    public AudioSource source; //Sound effect
 
     private void Start()
     {
+        //Get audio source
         source = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {   //Deal Damage to collision if the collision is enemy, turn of object to play sound effect, then destroy it
         if(collision.tag == "Enemy")
         {
             collision.GetComponent<EnemyStatus>().health -= damageAmount;
             source.Play(0);
-            Destroy(gameObject, 0.03f);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            Destroy(gameObject, 3f);
         }
     }
 }

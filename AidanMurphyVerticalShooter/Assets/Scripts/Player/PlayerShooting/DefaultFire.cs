@@ -5,8 +5,9 @@ using System.Collections.Generic;
 
 public class DefaultFire : State<PlayerShooting>
 {
-    private static DefaultFire _instance;
+    private static DefaultFire _instance; //Creating instance of Default Fire
 
+    //If instance already exists, break
     private DefaultFire()
     {
         if (_instance != null)
@@ -28,22 +29,26 @@ public class DefaultFire : State<PlayerShooting>
         }
     }
 
+    //What to do when state is entered
     public override void enterState(PlayerShooting _owner)
     {
         _owner.bulletText.text = "Ammo: " + "\u221E";
     }
 
+    //What to do when state is exited
     public override void exitState(PlayerShooting _owner)
     {
 
     }
 
+    //Update For this state
     public override void updateState(PlayerShooting _owner)
     {
         _owner.bulletText.text = "Ammo: " + "\u221E";
         Fire(_owner);
     }
 
+    //Default Fire Function
     void Fire(PlayerShooting _owner)
     {
         _owner.timeToNextAttack = Time.time + _owner.attackRate;
