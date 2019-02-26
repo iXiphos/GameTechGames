@@ -34,6 +34,8 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> ghosts;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +47,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y) && currPlayer.transform.position != spawnLoc.transform.position)
+        if (Input.GetKeyDown(KeyCode.Y) && currPlayer != null && begin)
         {
+            begin = false;
             StopAllCoroutines();
             StartCoroutine(Spawn());
         }
@@ -77,6 +80,8 @@ public class PlayerManager : MonoBehaviour
         respawn = true;
         yield return new WaitForSeconds(0.5f);
         SpawnNewPlayer();
+        yield return new WaitForSeconds(0.5f);
+        begin = true;
     }
 
     void SpawnNewPlayer()
@@ -103,7 +108,6 @@ public class PlayerManager : MonoBehaviour
         GameObject ghost = Instantiate(ghostSprite, spawnLoc.transform.position, ghostSprite.transform.rotation, transform);
         ghost.name = "ghost" + ghostNum;
         ghosts.Add(ghost);
-        Debug.Log(players[ghostNum].loc.Count);
         while (true)
         {
             if (players[ghostNum].loc.Count == c) break;
@@ -111,6 +115,7 @@ public class PlayerManager : MonoBehaviour
             c++;
             yield return null;
         }
+        ghost.GetComponent<BoxCollider2D>().enabled = true;
         ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         yield return null;
     }
