@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*To DO:
+ * World Interactions
+ * Reset Level
+ * Puzzle ideas
+ * Prototype mechanics 
+ */
 public class PlayerManager : MonoBehaviour
 {
 
@@ -32,7 +39,7 @@ public class PlayerManager : MonoBehaviour
     {
         ghosts = new List<GameObject>();
         players = new List<PlayerMovements>();
-        Spawn();
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -40,7 +47,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y) && currPlayer.transform.position != spawnLoc.transform.position)
         {
-            Spawn();
+            StopAllCoroutines();
+            StartCoroutine(Spawn());
         }
 
         if (respawn && playerTotal != 0)
@@ -54,13 +62,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void Spawn()
+    IEnumerator Spawn()
     {
         playerTotal++;
         Destroy(currPlayer);
         newPlayer = false;
-        GameObject PlayablePlayer = Instantiate(player, spawnLoc.transform.position, player.transform.rotation, transform);
-        currPlayer = PlayablePlayer;
         if(ghosts.Count != 0)
             for(int j = 0; j < ghosts.Count; j++)
             {
@@ -69,7 +75,14 @@ public class PlayerManager : MonoBehaviour
         PlayerMovements ghostPlayer = new PlayerMovements();
         players.Add(ghostPlayer);
         respawn = true;
-        StopAllCoroutines();
+        yield return new WaitForSeconds(0.5f);
+        SpawnNewPlayer();
+    }
+
+    void SpawnNewPlayer()
+    {
+        GameObject PlayablePlayer = Instantiate(player, spawnLoc.transform.position, player.transform.rotation, transform);
+        currPlayer = PlayablePlayer;
         StartCoroutine(tracePlayer());
     }
 
@@ -98,6 +111,7 @@ public class PlayerManager : MonoBehaviour
             c++;
             yield return null;
         }
+        ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         yield return null;
     }
 
