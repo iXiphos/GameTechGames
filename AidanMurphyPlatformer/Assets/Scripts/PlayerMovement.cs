@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject groundCollider;
 
     Rigidbody2D rgbd;
 
@@ -13,23 +12,27 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float jumpSpeed;
 
-    private bool grounded;
+    LayerMask layer;
 
     public float gravityIncreaseAmount;
+
+    public float fallMultiplyer = 15f;
+    public float lowJumpMultiplyer = 26f;
 
     // Start is called before the first frame update
     void Start()
     {
         rgbd = gameObject.GetComponent<Rigidbody2D>();
         defaultGravity = rgbd.gravityScale;
+        layer = LayerMask.GetMask("Ground");
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        grounded = groundCollider.GetComponent<FloorDetection>().touchingFloor;
         Movement();
         Jump();
+        BetterJump();
     }
 
     void Movement()
@@ -40,19 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetButtonDown("Jump") && grounded)
+        if (Physics2D.OverlapCircle(transform.position, 0.8f, layer))
         {
-            rgbd.AddForce(Vector2.up * jumpSpeed);
+            if(Input.GetButtonDown("Jump")) rgbd.velocity = Vector2.up * jumpSpeed;
         }
+    }
 
-        //if(rgbd.velocity.y < 0)
-        //{
-        //    rgbd.gravityScale = defaultGravity * gravityIncreaseAmount * Time.deltaTime;
-        //}else if(rgbd.velocity.y == 0)
-        //{
-        //    rgbd.gravityScale = defaultGravity;
-        //}
-
+    void BetterJump()
+    {
+        if (rgbd.velocity.y < 0) rgbd.gravityScale = fallMultiplyer;
+        else if (rgbd.velocity.y > 0 && !Input.GetButton("Jump")) rgbd.gravityScale = lowJumpMultiplyer;
+        else rgbd.gravityScale = 1f;
+        if (rgbd.velocity.y < 0.1f && rgbd.velocity.y > -0.1f) rgbd.velocity = new Vector2(rgbd.velocity.x, 0f);
     }
 
 }
