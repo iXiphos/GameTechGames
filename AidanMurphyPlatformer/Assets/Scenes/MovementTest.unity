@@ -363,6 +363,7 @@ MonoBehaviour:
     type: 3}
   spawnLoc: {fileID: 895905970}
   player: {fileID: 5921109322560591671, guid: 9c93a6e152c3ddc40a65169808f8dbd0, type: 3}
+  ghosts: []
 --- !u!4 &994932277
 Transform:
   m_ObjectHideFlags: 0
