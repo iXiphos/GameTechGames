@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2063498983807311947}
   - component: {fileID: 1322277180537979214}
-  - component: {fileID: 909424886530273405}
   - component: {fileID: 8137802832493281261}
   m_Layer: 8
   m_Name: PlayerGhost
@@ -70,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 57a29821ed6b563429aa056cfe772cec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f8f69ea144612d489a10ec475a7a309, type: 3}
   m_Color: {r: 1, g: 0.7058824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,27 +80,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &909424886530273405
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3789321611080126140}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!61 &8137802832493281261
 BoxCollider2D:
   m_ObjectHideFlags: 0

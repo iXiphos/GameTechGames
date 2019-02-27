@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> ghosts;
 
-
+    bool move = true;
 
     // Start is called before the first frame update
     void Start()
@@ -47,16 +47,15 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y) && currPlayer != null && begin)
+        if (Input.GetKeyDown(KeyCode.R) && currPlayer != null && begin)
         {
             begin = false;
-            StopAllCoroutines();
+            move = false;
             StartCoroutine(Spawn());
         }
 
         if (respawn && playerTotal != 0)
         {
-            ghosts.Clear();
             respawn = false;
             for (i = 0; i < playerTotal; i++)
             {
@@ -67,21 +66,28 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        playerTotal++;
         Destroy(currPlayer);
         newPlayer = false;
-        if(ghosts.Count != 0)
-            for(int j = 0; j < ghosts.Count; j++)
+        yield return null;
+        yield return null;
+        if (ghosts.Count != 0)
+        {
+            Debug.Log("Doing the job");
+            for (int j = 0; j < ghosts.Count; j++)
             {
                 Destroy(ghosts[j]);
             }
+        }
+        ghosts.Clear();
         PlayerMovements ghostPlayer = new PlayerMovements();
         players.Add(ghostPlayer);
-        respawn = true;
-        yield return new WaitForSeconds(0.5f);
-        SpawnNewPlayer();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        playerTotal++;
         begin = true;
+        respawn = true;
+        move = true;
+        ghosts.Clear();
+        SpawnNewPlayer();
     }
 
     void SpawnNewPlayer()
@@ -104,20 +110,22 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator ghostMovements(int ghostNum)
     {
+        yield return null;
         int c = 0;
         GameObject ghost = Instantiate(ghostSprite, spawnLoc.transform.position, ghostSprite.transform.rotation, transform);
         ghost.name = "ghost" + ghostNum;
         ghosts.Add(ghost);
-        while (true)
+        yield return null;
+        while (move)
         {
             if (players[ghostNum].loc.Count == c) break;
             players[ghostNum].Retrace(ghost);
             c++;
             yield return null;
         }
+        players[ghostNum].ResetDuplicate();
         ghost.GetComponent<BoxCollider2D>().enabled = true;
-        ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        yield return null;
+        //ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
 }
@@ -127,6 +135,11 @@ public class PlayerMovements
     public Queue<Vector3> loc = new Queue<Vector3>();
     public Queue<Sprite> sprites = new Queue<Sprite>();
 
+    Queue<Vector3> newQueue;
+    Queue<Sprite> newSpriteQueue;
+
+    bool duplicate = true;
+
     public void Track(GameObject player)
     {
         loc.Enqueue(player.transform.position);
@@ -135,12 +148,23 @@ public class PlayerMovements
     
     public void Retrace(GameObject newPlayer)
     {
-        Vector3 duplicateLoc = loc.Dequeue();
-        Sprite duplicateSprite = sprites.Dequeue();
-        newPlayer.transform.position = duplicateLoc;
-        newPlayer.GetComponent<SpriteRenderer>().sprite = duplicateSprite;
-        loc.Enqueue(duplicateLoc);
-        sprites.Enqueue(duplicateSprite);
+        if (duplicate)
+        {
+            loc.TrimExcess();
+            sprites.TrimExcess();
+            newQueue = new Queue<Vector3>(loc.ToArray());
+            newQueue.TrimExcess();
+            newSpriteQueue = new Queue<Sprite>(sprites.ToArray());
+            newSpriteQueue.TrimExcess();
+            duplicate = false;
+        }
+        newPlayer.transform.position = newQueue.Dequeue();
+        newPlayer.GetComponent<SpriteRenderer>().sprite = newSpriteQueue.Dequeue();
+    }
+
+    public void ResetDuplicate()
+    {
+        duplicate = true;
     }
 
 }
