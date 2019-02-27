@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (Physics2D.OverlapBox(feet.transform.position, new Vector2(1f, 0.2f), 0, layer))
             {

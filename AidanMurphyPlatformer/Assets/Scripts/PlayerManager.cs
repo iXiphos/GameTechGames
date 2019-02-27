@@ -57,10 +57,7 @@ public class PlayerManager : MonoBehaviour
         if (respawn && playerTotal != 0)
         {
             respawn = false;
-            for (i = 0; i < playerTotal; i++)
-            {
-                StartCoroutine(ghostMovements(i));
-            }
+            StartCoroutine(spawnGhosts());
         }
     }
 
@@ -72,7 +69,6 @@ public class PlayerManager : MonoBehaviour
         yield return null;
         if (ghosts.Count != 0)
         {
-            Debug.Log("Doing the job");
             for (int j = 0; j < ghosts.Count; j++)
             {
                 Destroy(ghosts[j]);
@@ -81,12 +77,13 @@ public class PlayerManager : MonoBehaviour
         ghosts.Clear();
         PlayerMovements ghostPlayer = new PlayerMovements();
         players.Add(ghostPlayer);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         playerTotal++;
         begin = true;
         respawn = true;
         move = true;
         ghosts.Clear();
+        yield return new WaitForSeconds(0.5f);
         SpawnNewPlayer();
     }
 
@@ -108,6 +105,15 @@ public class PlayerManager : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator spawnGhosts()
+    {
+        for (i = 0; i < playerTotal; i++)
+        {
+            StartCoroutine(ghostMovements(i));
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
     IEnumerator ghostMovements(int ghostNum)
     {
         yield return null;
@@ -121,7 +127,7 @@ public class PlayerManager : MonoBehaviour
             if (players[ghostNum].loc.Count == c) break;
             players[ghostNum].Retrace(ghost);
             c++;
-            yield return null;
+            yield return new WaitForSeconds(0.000001f);
         }
         players[ghostNum].ResetDuplicate();
         ghost.GetComponent<BoxCollider2D>().enabled = true;
