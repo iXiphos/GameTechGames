@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpSpeed: 13
-  fallMultiplyer: 5
-  lowJumpMultiplyer: 6
+  fallMultiplyer: 4.5
+  lowJumpMultiplyer: 5.5
   feet: {fileID: 47600994890488823}
   anim: {fileID: 0}
