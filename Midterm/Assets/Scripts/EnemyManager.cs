@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour
         //Loop through and spawn number of enemies
         for(int i = 0; i < numEnemies; i++)
         {
-            float randSize = Random.Range(0.75f, 2f); //Randomize the size of the enemy
+            float randSize = Random.Range(0.75f, 1.75f); //Randomize the size of the enemy
             float randX = Random.Range(-xRange, xRange); //Get X spawn location
             float randY = Random.Range(yRangeUp, yRangeDown); //Get y spawn Location
             GameObject enemy = Instantiate(enemyPrefab, new Vector2(randX, randY), transform.rotation); //Spawn Enemy

@@ -496,8 +496,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8498828332157932362, guid: dc08eb794ce873d42aced954589da467,
     type: 3}
-  xRange: 8.160981
-  yRangeUp: 4.23
+  xRange: 8
+  yRangeUp: 5
   yRangeDown: 1.35
   enemiesAlive: 0
   Score: 0
