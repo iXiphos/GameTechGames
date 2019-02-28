@@ -5,12 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public GameObject manager;
+    public GameObject manager; //The Enemy Manager
 
+    //If Clicked On
     private void OnMouseDown()
     {
-        manager.GetComponent<EnemyManager>().Score += 10;
-        manager.GetComponent<EnemyManager>().enemiesAlive--;
-        Destroy(gameObject);
+        manager.GetComponent<EnemyManager>().Score += 10; //Increase Score
+        manager.GetComponent<EnemyManager>().enemiesAlive--; //Decrease Enemies Alive
+        Destroy(gameObject); //Destory Enemies
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    public GameObject EnemyManager;
+    public GameObject EnemyManager; //Enemy Manager
 
-    public Text scoreText;
+    public Text scoreText; //The Text for Score
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "CurrentScore: " + EnemyManager.GetComponent<EnemyManager>().Score;
+        scoreText.text = "CurrentScore: " + EnemyManager.GetComponent<EnemyManager>().Score; //Diplay the Players Current Score
     }
 }

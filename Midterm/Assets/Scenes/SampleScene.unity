@@ -496,16 +496,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8498828332157932362, guid: dc08eb794ce873d42aced954589da467,
     type: 3}
-  sprites:
-  - {fileID: 21300000, guid: 88f409c5a14b6e546bc247141ed6c1db, type: 3}
-  - {fileID: 21300000, guid: 525474cec23dae040b59e4eb1084407b, type: 3}
-  - {fileID: 21300000, guid: b5dfeeda9a4883b48b5eed0b322dfe8f, type: 3}
-  - {fileID: 21300000, guid: c368e03a13068bf43a9c7cf775f62f36, type: 3}
   xRange: 8.160981
   yRangeUp: 4.23
   yRangeDown: 1.35
   enemiesAlive: 0
   Score: 0
+  EnemyDelay: 0.15
 --- !u!4 &1534753611
 Transform:
   m_ObjectHideFlags: 0
