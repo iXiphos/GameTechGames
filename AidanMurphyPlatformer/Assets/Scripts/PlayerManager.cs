@@ -121,13 +121,15 @@ public class PlayerManager : MonoBehaviour
         GameObject ghost = Instantiate(ghostSprite, spawnLoc.transform.position, ghostSprite.transform.rotation, transform);
         ghost.name = "ghost" + ghostNum;
         ghosts.Add(ghost);
-        yield return null;
         while (move)
         {
             if (players[ghostNum].loc.Count == c) break;
             players[ghostNum].Retrace(ghost);
             c++;
-            yield return new WaitForSeconds(0.0000005f);
+            yield return new WaitForSeconds(0.000001f);
+            if (players[ghostNum].loc.Count == c) break;
+            players[ghostNum].Retrace(ghost);
+            c++;
         }
         players[ghostNum].ResetDuplicate();
         ghost.GetComponent<BoxCollider2D>().enabled = true;

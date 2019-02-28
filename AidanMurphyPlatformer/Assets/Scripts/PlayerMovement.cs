@@ -14,16 +14,17 @@ public class PlayerMovement : MonoBehaviour
 
     LayerMask layer;
 
-    public float gravityIncreaseAmount;
-
     public float fallMultiplyer = 15f;
     public float lowJumpMultiplyer = 26f;
 
     public GameObject feet;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         rgbd = gameObject.GetComponent<Rigidbody2D>();
         defaultGravity = rgbd.gravityScale;
         layer = LayerMask.GetMask("Ground");
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space");
-            if (Physics2D.OverlapBox(feet.transform.position, new Vector2(1f, 0.2f), 0, layer))
+            if (Physics2D.OverlapBox(feet.transform.position, new Vector2(1.1f, 0.3f), 0, layer))
             {
                 rgbd.velocity = Vector2.up * jumpSpeed;
             }
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rgbd.velocity.y < 0) rgbd.gravityScale = fallMultiplyer;
         else if (rgbd.velocity.y > 0 && !Input.GetButton("Jump")) rgbd.gravityScale = lowJumpMultiplyer;
-        else rgbd.gravityScale = 1f;
+        else rgbd.gravityScale = 2f;
     }
 
 }

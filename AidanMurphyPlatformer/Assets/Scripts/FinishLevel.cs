@@ -37,7 +37,7 @@ public class FinishLevel : MonoBehaviour
 
     void Update()
     {
-        if (reloading && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
