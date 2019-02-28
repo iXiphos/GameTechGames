@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Space");
             if (Physics2D.OverlapBox(feet.transform.position, new Vector2(1f, 0.2f), 0, layer))
             {
                 rgbd.velocity = Vector2.up * jumpSpeed;

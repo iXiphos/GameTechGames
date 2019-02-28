@@ -127,11 +127,11 @@ public class PlayerManager : MonoBehaviour
             if (players[ghostNum].loc.Count == c) break;
             players[ghostNum].Retrace(ghost);
             c++;
-            yield return new WaitForSeconds(0.000001f);
+            yield return new WaitForSeconds(0.0000005f);
         }
         players[ghostNum].ResetDuplicate();
         ghost.GetComponent<BoxCollider2D>().enabled = true;
-        //ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
 }
