@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject manager;
+
+    private void OnMouseDown()
     {
-        
+        manager.GetComponent<EnemyManager>().Score += 10;
+        manager.GetComponent<EnemyManager>().enemiesAlive--;
+        Destroy(gameObject);
     }
 }

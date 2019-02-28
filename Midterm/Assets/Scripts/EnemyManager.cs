@@ -17,6 +17,10 @@ public class EnemyManager : MonoBehaviour
 
     public int enemiesAlive = 0;
 
+    public int Score = 0;
+
+    int currWave = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,17 +39,25 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator spawnEnemies() {
 
+        if(currWave % 5 == 0)
+        {
+            numEnemies++;
+        }
+
         for(int i = 0; i < numEnemies; i++)
         {
-            int randSprite = Random.Range(0, 4);
+            float randSize = Random.Range(0.75f, 2f);
             float randX = Random.Range(-xRange, xRange);
             float randY = Random.Range(yRangeUp, yRangeDown);
             GameObject enemy = Instantiate(enemyPrefab, new Vector2(randX, randY), transform.rotation);
             enemy.name = "Enemy" + i;
-            enemy.GetComponent<SpriteRenderer>().sprite = sprites[randSprite];
+            enemy.GetComponent<Enemy>().manager = gameObject;
+            enemy.transform.localScale = new Vector2(randSize, randSize);
             enemiesAlive++;
             yield return null;
         }
+
+        currWave++;
 
     }
 
