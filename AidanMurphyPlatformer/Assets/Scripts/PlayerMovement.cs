@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
+    bool isGrounded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,14 +48,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        isGrounded = feet.GetComponent<FloorDetection>().touchingFloor;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space");
-            if (Physics2D.OverlapBox(feet.transform.position, new Vector2(1.1f, 0.3f), 0, layer))
+            if (isGrounded)
             {
                 rgbd.velocity = Vector2.up * jumpSpeed;
             }
         }
+    }
+
+    void WallCheck()
+    {
+        
     }
 
     void BetterJump()

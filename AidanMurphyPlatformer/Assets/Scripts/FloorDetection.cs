@@ -13,13 +13,15 @@ public class FloorDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        touchingFloor = false;
         layer = LayerMask.GetMask("Ground");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Physics2D.OverlapBox(transform.position, new Vector2(1.1f, 1.1f), layer)) touchingFloor = true;
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 1f, layer);
+        if (col != null) touchingFloor = true;
         else touchingFloor = false;
     }
 }
