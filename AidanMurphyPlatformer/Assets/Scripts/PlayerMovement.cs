@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded = false;
 
+    bool shouldJump = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +34,20 @@ public class PlayerMovement : MonoBehaviour
         layer = LayerMask.GetMask("Ground");
     }
 
+    private void Update()
+    {
+        Jump();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         Movement();
-        Jump();
+        if (shouldJump)
+        {
+            shouldJump = false;
+            rgbd.velocity = Vector2.up * jumpSpeed;
+        }
         BetterJump();
     }
 
@@ -44,6 +55,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         rgbd.velocity = new Vector2(moveX * moveSpeed, rgbd.velocity.y);
+        RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.7f, layer);
+        if (col.collider != null)
+        {
+            if (col.collider.tag == "Ground")
+            {
+                rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
+            }
+        }
     }
 
     void Jump()
@@ -51,10 +70,9 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = feet.GetComponent<FloorDetection>().touchingFloor;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space");
             if (isGrounded)
             {
-                rgbd.velocity = Vector2.up * jumpSpeed;
+                shouldJump = true;
             }
         }
     }
