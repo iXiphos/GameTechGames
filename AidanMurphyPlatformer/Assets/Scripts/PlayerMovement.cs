@@ -58,10 +58,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.7f, layer);
         if (col.collider != null)
         {
-            if (col.collider.tag == "Ground")
-            {
-                rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
-            }
+            rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
         }
     }
 
