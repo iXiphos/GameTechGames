@@ -20,7 +20,7 @@ public class FloorDetection : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 1f, layer);
+        Collider2D col = Physics2D.OverlapBox(transform.position, new Vector2(0.9f, 0.1f), 0f, layer);
         if (col != null) touchingFloor = true;
         else touchingFloor = false;
     }

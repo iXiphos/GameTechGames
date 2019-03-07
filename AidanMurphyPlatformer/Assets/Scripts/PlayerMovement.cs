@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         rgbd.velocity = new Vector2(moveX * moveSpeed, rgbd.velocity.y);
-        RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.7f, layer);
+        RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.55f, layer);
         if (col.collider != null)
         {
             rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
