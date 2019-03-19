@@ -142,9 +142,11 @@ public class PlayerMovements
 {
     public Queue<Vector3> loc = new Queue<Vector3>();
     public Queue<Sprite> sprites = new Queue<Sprite>();
+    public Queue<bool> flips = new Queue<bool>();
 
     Queue<Vector3> newQueue;
     Queue<Sprite> newSpriteQueue;
+    Queue<bool> newFlips;
 
     bool duplicate = true;
 
@@ -152,22 +154,31 @@ public class PlayerMovements
     {
         loc.Enqueue(player.transform.position);
         sprites.Enqueue(player.GetComponent<SpriteRenderer>().sprite);
+        flips.Enqueue(player.GetComponent<SpriteRenderer>().flipX);
     }
     
     public void Retrace(GameObject newPlayer)
     {
         if (duplicate)
         {
+            flips.TrimExcess();
             loc.TrimExcess();
             sprites.TrimExcess();
+
             newQueue = new Queue<Vector3>(loc.ToArray());
             newQueue.TrimExcess();
+
             newSpriteQueue = new Queue<Sprite>(sprites.ToArray());
             newSpriteQueue.TrimExcess();
+
+            newFlips = new Queue<bool>(flips.ToArray());
+            newFlips.TrimExcess();
+
             duplicate = false;
         }
         newPlayer.transform.position = newQueue.Dequeue();
         newPlayer.GetComponent<SpriteRenderer>().sprite = newSpriteQueue.Dequeue();
+        newPlayer.GetComponent<SpriteRenderer>().flipX = newFlips.Dequeue();
     }
 
     public void ResetDuplicate()

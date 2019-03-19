@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     float defaultGravity;
 
+    public SpriteRenderer rend;
+
     public float moveSpeed;
     public float jumpSpeed;
 
@@ -42,6 +44,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(Input.GetAxis("Horizontal") != 0)
+        {
+            anim.SetBool("Moving", true);
+        }
+        else
+        {
+            anim.SetBool("Moving", false);
+        }
+
         Movement();
         if (shouldJump)
         {
@@ -55,6 +66,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         rgbd.velocity = new Vector2(moveX * moveSpeed, rgbd.velocity.y);
+        if(moveX < 0)
+        {
+            rend.flipX = true;
+        }
+        else if(moveX > 0)
+        {
+            rend.flipX = false;
+        }
         RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.55f, layer);
         if (col.collider != null)
         {
