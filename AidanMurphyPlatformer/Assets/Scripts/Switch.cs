@@ -17,7 +17,7 @@ public class Switch : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && !open)
+        if((collision.tag == "Player" || collision.tag == "Ghost") && !open)
         {
             open = true;
         }
@@ -26,7 +26,7 @@ public class Switch : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         --count;
-        if (collision.tag == "Player" && count == 0)
+        if ((collision.tag == "Player" || collision.tag == "Ghost") && count == 0)
         {
              open = false;
         }

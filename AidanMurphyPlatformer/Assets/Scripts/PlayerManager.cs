@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
 
     List<PlayerMovements> players;
 
-    bool newPlayer = true;
+    public bool newPlayer = true;
 
     bool begin = true;
 
@@ -33,6 +33,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject player;
 
     public List<GameObject> ghosts;
+
+    public bool destroyGhost = false;
 
     bool move = true;
 
@@ -61,7 +63,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    IEnumerator Spawn()
+    public IEnumerator Spawn()
     {
         Destroy(currPlayer);
         newPlayer = false;
@@ -102,6 +104,17 @@ public class PlayerManager : MonoBehaviour
             players[playerTotal].Track(currPlayer);
             yield return null;
         }
+
+        if (destroyGhost)
+        {
+            players[playerTotal].destroy = true;
+        }
+        else
+        {
+            players[playerTotal].destroy = false;
+        }
+
+        destroyGhost = false;
         yield return null;
     }
 
@@ -134,6 +147,10 @@ public class PlayerManager : MonoBehaviour
         players[ghostNum].ResetDuplicate();
         ghost.GetComponent<BoxCollider2D>().enabled = true;
         ghost.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        if (players[ghostNum].destroy)
+        {
+            Destroy(ghost);
+        }
     }
 
 }
@@ -149,6 +166,8 @@ public class PlayerMovements
     Queue<bool> newFlips;
 
     bool duplicate = true;
+
+    public bool destroy;
 
     public void Track(GameObject player)
     {
