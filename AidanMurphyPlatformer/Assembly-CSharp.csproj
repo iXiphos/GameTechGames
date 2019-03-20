@@ -60,14 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\KillGhost.cs" />
     <Compile Include="Assets\Scripts\FinishLevel.cs" />
     <Compile Include="Assets\Scripts\FloorDetection.cs" />
+    <Compile Include="Assets\Scripts\KillGhost.cs" />
     <Compile Include="Assets\Scripts\PixelPerfect.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\spawnText.cs" />
+    <Compile Include="Assets\Scripts\Spikes.cs" />
     <Compile Include="Assets\Scripts\Switch.cs" />
-    <Compile Include="Assets\Spikes.cs" />
     <None Include="Assets\Scripts\HologramShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aemur/source/repos/aidan-murphy/AidanMurphyPlatformer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

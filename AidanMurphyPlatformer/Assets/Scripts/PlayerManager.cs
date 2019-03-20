@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 /*To DO:
  * World Interactions
@@ -20,7 +20,8 @@ public class PlayerManager : MonoBehaviour
 
     bool respawn = false;
 
-    int playerTotal = -1;
+    [HideInInspector]
+    public int playerTotal = -1;
 
     GameObject currPlayer;
 
@@ -38,6 +39,8 @@ public class PlayerManager : MonoBehaviour
 
     bool move = true;
 
+    public Text totalGhosts;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        totalGhosts.text = "Ghost Used: " + (playerTotal);
         if (Input.GetKeyDown(KeyCode.R) && currPlayer != null && begin)
         {
             begin = false;
