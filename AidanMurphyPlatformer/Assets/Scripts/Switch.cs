@@ -37,13 +37,13 @@ public class Switch : MonoBehaviour
         if (open)
         {
             Door.GetComponent<BoxCollider2D>().enabled = false;
-            Door.GetComponent<SpriteRenderer>().enabled = false;
+            Door.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
         else
         {
             Door.GetComponent<BoxCollider2D>().enabled = true;
-            Door.GetComponent<SpriteRenderer>().enabled = true;
+            Door.SetActive(true);
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
     }

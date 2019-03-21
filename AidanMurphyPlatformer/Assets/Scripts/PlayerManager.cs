@@ -52,7 +52,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        totalGhosts.text = "Ghost Used: " + (playerTotal);
         if (Input.GetKeyDown(KeyCode.R) && currPlayer != null && begin)
         {
             begin = false;
@@ -85,6 +84,7 @@ public class PlayerManager : MonoBehaviour
         players.Add(ghostPlayer);
         yield return new WaitForSeconds(0.2f);
         playerTotal++;
+        totalGhosts.text = "Ghost Used: " + (playerTotal);
         begin = true;
         respawn = true;
         move = true;

@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool shouldJump = false;
 
+    float moveX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,15 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Jump();
+        if (moveX < 0)
+        {
+            rend.flipX = true;
+        }
+        else if (moveX > 0)
+        {
+            rend.flipX = false;
+        }
+        moveX = Input.GetAxis("Horizontal");
     }
 
     // Update is called once per frame
@@ -64,19 +75,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        float moveX = Input.GetAxis("Horizontal");
         rgbd.velocity = new Vector2(moveX * moveSpeed, rgbd.velocity.y);
-        if(moveX < 0)
-        {
-            rend.flipX = true;
-        }
-        else if(moveX > 0)
-        {
-            rend.flipX = false;
-        }
         RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.55f, layer);
         if (col.collider != null)
         {
+            Debug.Log("Wall Check");
             rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
         }
     }
@@ -91,11 +94,6 @@ public class PlayerMovement : MonoBehaviour
                 shouldJump = true;
             }
         }
-    }
-
-    void WallCheck()
-    {
-        
     }
 
     void BetterJump()
