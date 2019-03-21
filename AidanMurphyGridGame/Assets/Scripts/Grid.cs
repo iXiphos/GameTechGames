@@ -20,12 +20,16 @@ public class Grid : MonoBehaviour
     int gridSizeX, gridSizeY;
 
     int x = 0, y = 0;
+
+    private static Grid instance;
+
     public void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-        CreateGrid(); 
+        CreateGrid();
+        instance = this;
     }
 
     //Max Size of Grid
@@ -66,7 +70,7 @@ public class Grid : MonoBehaviour
     }
 
     //Turn the World position of Game Object to Node location
-    public Node NodeFromWorldPosition(Vector3 a_WorldPosition, bool enemy)
+    public Node NodeFromWorldPosition(Vector3 a_WorldPosition)
     {
         float xpoint = ((a_WorldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
         float ypoint = ((a_WorldPosition.y + gridWorldSize.y / 2) / gridWorldSize.y);
