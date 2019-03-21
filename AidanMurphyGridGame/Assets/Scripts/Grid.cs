@@ -19,17 +19,16 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    int x = 0, y = 0;
-
-    private static Grid instance;
+    int x, y;
 
     public void Awake()
     {
+        x = 0;
+        y = 0;
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
-        instance = this;
     }
 
     //Max Size of Grid
@@ -64,7 +63,7 @@ public class Grid : MonoBehaviour
                 Square.transform.parent = transform;
                 Square.name = "Square-" + (x) + "-" + (gridSizeY - y - 1);
                 //Create Node in Grid
-                grid[x, y] = new Node(Wall, worldPoint, x, y);
+                grid[x, y] = new Node(Wall, worldPoint, x, y, Square);
             }
         }
     }
@@ -81,6 +80,19 @@ public class Grid : MonoBehaviour
         int y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
 
         return grid[x, y];
+    }
+
+    public GameObject SquareFromWorldPosition(Vector3 a_WorldPosition)
+    {
+        float xpoint = ((a_WorldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
+        float ypoint = ((a_WorldPosition.y + gridWorldSize.y / 2) / gridWorldSize.y);
+
+        xpoint = Mathf.Clamp01(xpoint);
+        ypoint = Mathf.Clamp01(ypoint);
+        int x = Mathf.RoundToInt((gridSizeX - 1) * xpoint);
+        int y = Mathf.RoundToInt((gridSizeY - 1) * ypoint);
+
+        return grid[x, y].square;
     }
 
     //Return a list of nodes that represent the nodes next to object

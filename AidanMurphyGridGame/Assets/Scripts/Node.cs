@@ -12,18 +12,21 @@ public class Node : IHeapItem<Node>
 
     public Node Parent;
 
+    public GameObject square;
+
     public int gCost;
     public int hCost;
     int heapIndex;
 
     public int FCost { get { return gCost + hCost; } }
 
-    public Node(bool a_Iswall, Vector3 a_pos, int a_gridX, int a_gridY)
+    public Node(bool a_Iswall, Vector3 a_pos, int a_gridX, int a_gridY, GameObject Square)
     {
         isWall = a_Iswall;
         Position = a_pos;
         gridX = a_gridX;
         gridY = a_gridY;
+        square = Square;
     }
 
     public int HeapIndex

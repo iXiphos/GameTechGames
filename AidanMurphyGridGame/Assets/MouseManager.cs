@@ -7,16 +7,34 @@ public class MouseManager : MonoBehaviour
 
     Grid grid;
 
-    Node currNode;
+    bool hover;
+
+    GameObject currentSquare;
+
+
     // Start is called before the first frame update
     void Start()
     {
         grid = new Grid();
     }
 
+    private void Update()
+    {
+        MouseOver();
+    }
+
     private void MouseOver()
     {
         Vector2 mouse = Input.mousePosition;
-        currNode = grid.NodeFromWorldPosition(mouse);
+        currentSquare = grid.SquareFromWorldPosition(mouse);
+        if(currentSquare != null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
+
+    private void mouseExit()
+    {
+        
     }
 }
