@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class spawnText : MonoBehaviour
 {
-    public Text txt;
+    public Text txt; //Text To be Spawned
 
     bool spawned = false;
 
+    //Spawn the Text when the player walks into trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player" && !spawned)
@@ -17,6 +18,7 @@ public class spawnText : MonoBehaviour
         }
     }
 
+    //Clear text and don't display it again when the player leaves the text
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player")

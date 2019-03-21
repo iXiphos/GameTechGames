@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    public LayerMask layer;
+    public GameObject playerManager; //Player Manager
 
-    public GameObject playerManager;
-
+    //When the player enters the spike, auto reset the player
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("spike");
             StartCoroutine(playerManager.GetComponent<PlayerManager>().Spawn());
         }
     }

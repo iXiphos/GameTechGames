@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\FinishLevel.cs" />
     <Compile Include="Assets\Scripts\FloorDetection.cs" />
     <Compile Include="Assets\Scripts\KillGhost.cs" />
-    <Compile Include="Assets\Scripts\PixelPerfect.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\spawnText.cs" />

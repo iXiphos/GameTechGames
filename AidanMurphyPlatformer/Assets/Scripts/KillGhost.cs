@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class KillGhost : MonoBehaviour
 {
-
-    public GameObject PlayerManager;
+    public GameObject PlayerManager; //Player Manager
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        //If the colision is player, destroy the ghost tracking
         if(col.gameObject.tag == "Player")
         {
             PlayerManager.GetComponent<PlayerManager>().newPlayer = false;
