@@ -79,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D col = Physics2D.Raycast(feet.transform.position, new Vector2(moveX, 0), 0.55f, layer);
         if (col.collider != null)
         {
-            Debug.Log("Wall Check");
             rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
         }
     }
