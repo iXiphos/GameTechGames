@@ -73,15 +73,17 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
+
+				//Set the color to represent a sin graph that changes over time
 				col = col * max(0, sin(i.vertex.y * _ScanningFrequency + _Time.x * _ScanningSpeed) + _Bias);
 				//col *= 0 + max(0, cos(i.objVertex.x * _ScanningFrequency + _Time.x * _ScanningSpeed) + 0.9);
 				//col *= 0.5 + max(0, cos(i.objVertex.z * _ScanningFrequency + _Time.x * _ScanningSpeed) + 0.9);
 
+				//Fix the black lines at the end
 				fixed4 up = tex2D(_MainTex, i.uv + fixed2(0, _MainTex_TexelSize.y));
 				fixed4 down = tex2D(_MainTex, i.uv - fixed2(0, _MainTex_TexelSize.y));
 				fixed4 left = tex2D(_MainTex, i.uv - fixed2(_MainTex_TexelSize.x, 0));
 				fixed4 right = tex2D(_MainTex, i.uv + fixed2(_MainTex_TexelSize.x, 0));
-
 				if (up.a * down.a * left.a * right.a == 0) {
 					col.rgb = _OutlineColor.rgb;
 				}
