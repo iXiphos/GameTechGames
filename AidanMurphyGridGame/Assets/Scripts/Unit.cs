@@ -7,12 +7,18 @@ public class Unit : MonoBehaviour
 {
     Grid grid;
     public GameObject GridManager; //Grid Manager Object
-    public Transform target; //Player
+    public GameObject TurnManager; //Player
     public float speed = 5; //How fast the enemy should move
     Vector3[] path; //Array of the path enemy should take
     int targetIndex; //Current target location in path
 
+    public int PlayerNumber;
+
     public int MoveAmount;
+
+    public bool Move = true;
+
+    public Color color;
 
     // Start is called before the first frame update
     void Start()
@@ -20,18 +26,17 @@ public class Unit : MonoBehaviour
         grid = GridManager.GetComponent<Grid>();
     }
 
-
     void Update()
     {
-        MovePlayer();
+        if((TurnManager.GetComponent<TurnManager>().TurnCount % 2) != PlayerNumber && Move)
+        {
+            MovePlayer();
+        }
     }
 
     void MovePlayer()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
-        }
+        PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
     }
 
 
@@ -39,13 +44,39 @@ public class Unit : MonoBehaviour
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         //If the path doesn't exist, reset the game
-        if (pathSuccessful && newPath.Length <= MoveAmount)
+        if (pathSuccessful && newPath.Length <= MoveAmount && Input.GetMouseButtonDown(0))
         {
+            Move = false;
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
+        }else if(pathSuccessful && newPath.Length <= MoveAmount)
+        {
+            path = newPath;
+            targetIndex = 0;
+            StopCoroutine("drawPath");
+            StartCoroutine("drawPath");
         }
+    }
+
+    IEnumerator drawPath()
+    {
+        while (true)
+        {
+            for (int i = targetIndex; i < path.Length; i++)
+            {
+                if (i == targetIndex)
+                {
+                    GL.Begin(GL.LINES);
+                    GL.Color(Color.red);
+                    GL.Vertex(transform.position);
+                    GL.Vertex(path[i]);
+                    GL.End();
+                }
+            }
+        }
+        yield return null;
     }
 
     //Follow the path given
