@@ -20,15 +20,30 @@ public class Unit : MonoBehaviour
 
     public Color color;
 
+    private LineRenderer line;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Add a Line Renderer to the GameObject
+        line = this.gameObject.AddComponent<LineRenderer>();
+        // Set the width of the Line Renderer
+        line.SetWidth(0.05F, 0.05F);
+        // Set the number of vertex fo the Line Renderer
         grid = GridManager.GetComponent<Grid>();
     }
 
 
     void Update()
     {
+        if (Move)
+        {
+            line.enabled = true;
+        }
+        else
+        {
+            line.enabled = false;
+        }
         MovePlayer();
     }
 
@@ -48,9 +63,13 @@ public class Unit : MonoBehaviour
     {
         if (pathSuccessful && newPath.Length <= MoveAmount)
         {
-            Move = false;
             path = newPath;
             targetIndex = 0;
+            line.positionCount = path.Length;
+            for (int i = targetIndex; i < path.Length; i++)
+            {
+                line.SetPosition(i, path[i]);
+            }
         }
     }
 
@@ -88,6 +107,7 @@ public class Unit : MonoBehaviour
             }
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
+
         }
     }
 
