@@ -54,12 +54,13 @@ public class Grid : MonoBehaviour
             {
                 Vector2 worldPoint = bottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
                 bool Wall = false;
-                if(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask))
+                if (Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, WallMask))
                 {
                     Wall = true;
                 }
 
                 GameObject Square = GameObject.Instantiate(square, worldPoint, gameObject.transform.rotation);
+                Square.transform.position = new Vector3(Square.transform.position.x, Square.transform.position.y, 1);
                 Square.transform.parent = transform;
                 Square.name = "Square-" + (x) + "-" + (gridSizeY - y - 1);
                 //Create Node in Grid
