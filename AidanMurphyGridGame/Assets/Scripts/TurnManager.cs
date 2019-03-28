@@ -23,6 +23,16 @@ public class TurnManager : MonoBehaviour
     {
         grid = GridManager.GetComponent<Grid>();
         TurnCount = 0;
+        if (TurnCount % 2 == 0)
+        {
+            player1.GetComponent<Unit>().enabled = true;
+            player2.GetComponent<Unit>().enabled = false;
+        }
+        else
+        {
+            player1.GetComponent<Unit>().enabled = false;
+            player2.GetComponent<Unit>().enabled = true;
+        }
         txt.text = "Turn: 0";
     }
 

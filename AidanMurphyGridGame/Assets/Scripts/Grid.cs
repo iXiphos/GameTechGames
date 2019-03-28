@@ -64,7 +64,7 @@ public class Grid : MonoBehaviour
                 Square.name = "Square-" + (x) + "-" + (gridSizeY - y - 1);
                 if (Wall)
                 {
-                    Square.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0, 255);
+                    Square.GetComponent<SpriteRenderer>().color = new Color(255f, 255f, 0f, (110f/255f));
                 }
                 //Create Node in Grid
                 grid[x, y] = new Node(Wall, worldPoint, x, y, Square);

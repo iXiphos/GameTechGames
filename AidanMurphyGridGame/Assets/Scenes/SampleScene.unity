@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnManager: {fileID: 567799018}
+  TurnCount: 0
 --- !u!114 &206613399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ MonoBehaviour:
   TurnManager: {fileID: 567799018}
   speed: 5
   PlayerNumber: 1
-  MoveAmount: 5
+  MoveAmount: 6
   Move: 1
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &206613400
@@ -480,7 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -545,7 +546,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -826,7 +827,7 @@ MonoBehaviour:
   TurnManager: {fileID: 567799018}
   speed: 5
   PlayerNumber: 0
-  MoveAmount: 5
+  MoveAmount: 6
   Move: 1
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1027163195
@@ -842,6 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnManager: {fileID: 0}
+  TurnCount: 0
 --- !u!1 &1624026542
 GameObject:
   m_ObjectHideFlags: 0
