@@ -26,57 +26,31 @@ public class Unit : MonoBehaviour
         grid = GridManager.GetComponent<Grid>();
     }
 
+
     void Update()
     {
-        if((TurnManager.GetComponent<TurnManager>().TurnCount % 2) != PlayerNumber && Move)
+        if((TurnManager.GetComponent<TurnManager>().TurnCount % 2) != PlayerNumber)
         {
-            MovePlayer();
+            Move = true;
+            StartCoroutine(MovePlayer());
+        }
+        else if(!Move)
+        {
+            StopCoroutine(MovePlayer());
         }
     }
-
-    void MovePlayer()
-    {
-        PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
-    }
-
 
     //If a path is found by PathFinding, start to move across path
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         //If the path doesn't exist, reset the game
-        if (pathSuccessful && newPath.Length <= MoveAmount && Input.GetMouseButtonDown(0))
+        if (pathSuccessful && newPath.Length <= MoveAmount)
         {
-            Move = false;
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
-        }else if(pathSuccessful && newPath.Length <= MoveAmount)
-        {
-            path = newPath;
-            targetIndex = 0;
-            StopCoroutine("drawPath");
-            StartCoroutine("drawPath");
         }
-    }
-
-    IEnumerator drawPath()
-    {
-        while (true)
-        {
-            for (int i = targetIndex; i < path.Length; i++)
-            {
-                if (i == targetIndex)
-                {
-                    GL.Begin(GL.LINES);
-                    GL.Color(Color.red);
-                    GL.Vertex(transform.position);
-                    GL.Vertex(path[i]);
-                    GL.End();
-                }
-            }
-        }
-        yield return null;
     }
 
     //Follow the path given
