@@ -29,14 +29,28 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
-        if((TurnManager.GetComponent<TurnManager>().TurnCount % 2) != PlayerNumber)
+        MovePlayer();
+    }
+
+    void MovePlayer()
+    {
+        if (Input.GetMouseButtonDown(0) && Move)
         {
-            Move = true;
-            StartCoroutine(MovePlayer());
+            PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
         }
-        else if(!Move)
+        else if(Move)
         {
-            StopCoroutine(MovePlayer());
+            PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), drawPath);
+        }
+    }
+
+    public void drawPath(Vector3[] newPath, bool pathSuccessful)
+    {
+        if (pathSuccessful && newPath.Length <= MoveAmount)
+        {
+            Move = false;
+            path = newPath;
+            targetIndex = 0;
         }
     }
 
@@ -46,6 +60,7 @@ public class Unit : MonoBehaviour
         //If the path doesn't exist, reset the game
         if (pathSuccessful && newPath.Length <= MoveAmount)
         {
+            Move = false;
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
