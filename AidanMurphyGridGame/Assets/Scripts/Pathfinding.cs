@@ -107,6 +107,7 @@ public class Pathfinding : MonoBehaviour
             FinalPath.Add(CurrentNode);
             CurrentNode = CurrentNode.Parent;
         }
+        FinalPath.Add(CurrentNode);
         //Debug.Log(FinalPath.Count);
         Vector3[] waypoints = VectorPath(FinalPath);
         Array.Reverse(waypoints);

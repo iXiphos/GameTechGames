@@ -14,9 +14,14 @@ public class TurnManager : MonoBehaviour
 
     public GameObject player2;
 
+    Grid grid;
+
+    public GameObject GridManager; //Grid Manager Object
+
     // Start is called before the first frame update
     void Start()
     {
+        grid = GridManager.GetComponent<Grid>();
         TurnCount = 0;
         txt.text = "Turn: 0";
     }
@@ -24,6 +29,18 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(grid.NodeFromWorldPosition(player1.transform.position).Position == grid.NodeFromWorldPosition(player2.transform.position).Position)
+        {
+            if (TurnCount % 2 == 0)
+            {
+                Debug.Log("Player1 Wins");
+            }
+            else
+            {
+                Debug.Log("Player2 Wins");
+            }
+        }
+
         if (TurnCount % 2 == 0)
         {
             player1.GetComponent<Unit>().enabled = true;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerControllers : MonoBehaviour
 {
+
+    public GameObject TurnManager;
+    public int TurnCount;
+
     // Start is called before the first frame update
     void Start()
     {

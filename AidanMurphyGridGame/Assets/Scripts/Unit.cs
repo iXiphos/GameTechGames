@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour
         line.SetWidth(0.05F, 0.05F);
         // Set the number of vertex fo the Line Renderer
         grid = GridManager.GetComponent<Grid>();
+        transform.position = grid.NodeFromWorldPosition(transform.position).Position;
     }
 
 
@@ -70,6 +71,10 @@ public class Unit : MonoBehaviour
             {
                 line.SetPosition(i, path[i]);
             }
+        }
+        else
+        {
+            line.positionCount = 0;
         }
     }
 

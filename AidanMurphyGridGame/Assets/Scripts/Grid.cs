@@ -58,11 +58,14 @@ public class Grid : MonoBehaviour
                 {
                     Wall = true;
                 }
-
                 GameObject Square = GameObject.Instantiate(square, worldPoint, gameObject.transform.rotation);
                 Square.transform.position = new Vector3(Square.transform.position.x, Square.transform.position.y, 1);
                 Square.transform.parent = transform;
                 Square.name = "Square-" + (x) + "-" + (gridSizeY - y - 1);
+                if (Wall)
+                {
+                    Square.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0, 255);
+                }
                 //Create Node in Grid
                 grid[x, y] = new Node(Wall, worldPoint, x, y, Square);
             }
