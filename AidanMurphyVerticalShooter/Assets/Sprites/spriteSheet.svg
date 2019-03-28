@@ -25,11 +25,11 @@
       <stop
          id="stop4572"
          offset="0"
-         style="stop-color:#00ffff;stop-opacity:0;" />
+         style="stop-color:#ffffff;stop-opacity:0" />
       <stop
          id="stop4570"
          offset="1"
-         style="stop-color:#00ffff;stop-opacity:1;" />
+         style="stop-color:#ffffff;stop-opacity:1" />
     </linearGradient>
     <radialGradient
        inkscape:collect="always"
@@ -41,7 +41,7 @@
        fy="76.866661"
        r="16.933332"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.99983978,0.01790006,-0.01578363,0.88162286,1.2322266,6.9775016)" />
+       gradientTransform="matrix(1.7589015,0.01500961,-0.01414237,1.6572766,-88.868051,-52.301797)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -50,9 +50,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="476.6664"
-     inkscape:cy="813.6043"
+     inkscape:zoom="2.8"
+     inkscape:cx="452.29417"
+     inkscape:cy="820.13492"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -64,7 +64,9 @@
      inkscape:window-x="-13"
      inkscape:window-y="-13"
      inkscape:window-maximized="1"
-     inkscape:snap-global="false">
+     inkscape:snap-global="false"
+     inkscape:measure-start="0,0"
+     inkscape:measure-end="0,0">
     <inkscape:grid
        type="xygrid"
        id="grid3713"
@@ -95,6 +97,13 @@
        width="33.866665"
        height="33.866665"
        x="101.6"
+       y="59.933331" />
+    <rect
+       style="fill:#00ffff;stroke:none;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4529"
+       width="33.866665"
+       height="33.866665"
+       x="33.866665"
        y="59.933331" />
   </g>
 </svg>
