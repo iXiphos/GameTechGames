@@ -54,15 +54,48 @@ public class Unit : MonoBehaviour
         {
             PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
         }
+        else if (Input.GetMouseButtonDown(1) && Move && !grid.NodeFromWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).isWall)
+        {
+            Move = false;
+            blockTile();
+        }
         else if(Move)
         {
             PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), drawPath);
         }
     }
 
+    void checkTilesAround()
+    {
+        bool captured = false;
+        List<Node> tmp;
+        tmp = grid.GetNeighboringNodes(grid.NodeFromWorldPosition(transform.position));
+        for(int i = 0; i < tmp.Count; i++)
+        {
+            if (!tmp[i].isWall)
+            {
+                captured = true;
+            }
+        }
+
+        if (captured)
+        {
+            TurnManager.GetComponent<TurnManager>().Win();
+
+        }
+    }
+    
+    void blockTile()
+    {
+        Node tmp = grid.NodeFromWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        tmp.square.GetComponent<SpriteRenderer>().color = new Color(253f, 255f, 0f, 110f / 255f);
+        tmp.isWall = true;
+    }
+
+
     public void drawPath(Vector3[] newPath, bool pathSuccessful)
     {
-        if (pathSuccessful && newPath.Length <= MoveAmount)
+        if (pathSuccessful && newPath.Length <= MoveAmount && newPath.Length > 0)
         {
             path = newPath;
             targetIndex = 0;

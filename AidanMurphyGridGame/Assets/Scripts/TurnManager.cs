@@ -10,6 +10,8 @@ public class TurnManager : MonoBehaviour
 
     public Text txt;
 
+    public Text winText;
+
     public GameObject player1;
 
     public GameObject player2;
@@ -39,16 +41,9 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(grid.NodeFromWorldPosition(player1.transform.position).Position == grid.NodeFromWorldPosition(player2.transform.position).Position)
+        if (grid.NodeFromWorldPosition(player1.transform.position).Position == grid.NodeFromWorldPosition(player2.transform.position).Position)
         {
-            if (TurnCount % 2 == 0)
-            {
-                Debug.Log("Player1 Wins");
-            }
-            else
-            {
-                Debug.Log("Player2 Wins");
-            }
+            Win();
         }
 
         if (TurnCount % 2 == 0)
@@ -64,6 +59,17 @@ public class TurnManager : MonoBehaviour
         NextTurn();
     }
 
+    public void Win()
+    { 
+      if (TurnCount % 2 == 0)
+      {
+          
+      }
+      else
+      {
+
+      }
+    }
 
     void NextTurn()
     {
