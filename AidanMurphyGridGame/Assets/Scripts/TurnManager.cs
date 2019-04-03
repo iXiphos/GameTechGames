@@ -67,6 +67,25 @@ public class TurnManager : MonoBehaviour
 
     void NextTurn()
     {
+        if (TurnCount % 2 == 0)
+        {
+            if(player1.GetComponent<Unit>().Move != true)
+            {
+                changeTurn();
+            }
+        }
+        else
+        {
+            if (player2.GetComponent<Unit>().Move != true)
+            {
+                changeTurn();
+            }
+        }
+       
+    }
+
+    void changeTurn()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TurnCount++;

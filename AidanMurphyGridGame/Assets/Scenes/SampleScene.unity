@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 206613401}
   - component: {fileID: 206613400}
   - component: {fileID: 206613399}
-  - component: {fileID: 206613398}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -230,20 +229,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &206613398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206613397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1f301b3a698e574cb1c9d8c295730cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TurnManager: {fileID: 567799018}
-  TurnCount: 0
 --- !u!114 &206613399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,7 +726,6 @@ GameObject:
   - component: {fileID: 1027163193}
   - component: {fileID: 1027163192}
   - component: {fileID: 1027163194}
-  - component: {fileID: 1027163195}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -830,20 +814,6 @@ MonoBehaviour:
   MoveAmount: 6
   Move: 1
   color: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &1027163195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027163191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1f301b3a698e574cb1c9d8c295730cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TurnManager: {fileID: 0}
-  TurnCount: 0
 --- !u!1 &1624026542
 GameObject:
   m_ObjectHideFlags: 0
