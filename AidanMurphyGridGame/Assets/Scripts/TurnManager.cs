@@ -18,6 +18,8 @@ public class TurnManager : MonoBehaviour
 
     Grid grid;
 
+    bool gameOver = false;
+
     public GameObject GridManager; //Grid Manager Object
 
     // Start is called before the first frame update
@@ -27,13 +29,13 @@ public class TurnManager : MonoBehaviour
         TurnCount = 0;
         if (TurnCount % 2 == 0)
         {
-            player1.GetComponent<Unit>().enabled = true;
-            player2.GetComponent<Unit>().enabled = false;
+            player1.GetComponent<Unit>().currTurn = true;
+            player2.GetComponent<Unit>().currTurn = false;
         }
         else
         {
-            player1.GetComponent<Unit>().enabled = false;
-            player2.GetComponent<Unit>().enabled = true;
+            player1.GetComponent<Unit>().currTurn = false;
+            player2.GetComponent<Unit>().currTurn = true;
         }
         txt.text = "Turn: 0";
     }
@@ -43,33 +45,35 @@ public class TurnManager : MonoBehaviour
     {
         if (grid.NodeFromWorldPosition(player1.transform.position).Position == grid.NodeFromWorldPosition(player2.transform.position).Position)
         {
-            Win();
+            if (TurnCount % 2 == 0)
+            {
+                Win("Player 1 Wins");
+            }
+            else
+            {
+                Win("Player 2 Wins");
+            }
         }
-
         if (TurnCount % 2 == 0)
         {
-            player1.GetComponent<Unit>().enabled = true;
-            player2.GetComponent<Unit>().enabled = false;
+            player1.GetComponent<Unit>().currTurn = true;
+            player2.GetComponent<Unit>().currTurn = false;
         }
         else
         {
-            player1.GetComponent<Unit>().enabled = false;
-            player2.GetComponent<Unit>().enabled = true;
+            player1.GetComponent<Unit>().currTurn = false;
+            player2.GetComponent<Unit>().currTurn = true;
         }
         NextTurn();
     }
 
-    public void Win()
-    { 
-      if (TurnCount % 2 == 0)
-      {
-          
-      }
-      else
-      {
-
-      }
-    }
+    public void Win(string newText)
+    {
+        gameOver = true;
+        player1.GetComponent<Unit>().enabled = false;
+        player2.GetComponent<Unit>().enabled = false;
+        winText.text = newText;
+    } 
 
     void NextTurn()
     {

@@ -22,6 +22,10 @@ public class Unit : MonoBehaviour
 
     private LineRenderer line;
 
+    public int playerNum;
+
+    public bool currTurn = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,7 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
+        checkTilesAround();
         if (Move)
         {
             line.enabled = true;
@@ -45,7 +50,7 @@ public class Unit : MonoBehaviour
         {
             line.enabled = false;
         }
-        MovePlayer();
+        if (currTurn) MovePlayer();
     }
 
     void MovePlayer()
@@ -70,18 +75,16 @@ public class Unit : MonoBehaviour
         bool captured = false;
         List<Node> tmp;
         tmp = grid.GetNeighboringNodes(grid.NodeFromWorldPosition(transform.position));
-        for(int i = 0; i < tmp.Count; i++)
-        {
-            if (!tmp[i].isWall)
+        foreach(Node node in tmp) {
+            if (!node.isWall)
             {
                 captured = true;
             }
         }
 
-        if (captured)
+        if (!captured)
         {
-            TurnManager.GetComponent<TurnManager>().Win();
-
+            TurnManager.GetComponent<TurnManager>().Win("Player " + playerNum + " wins");
         }
     }
     

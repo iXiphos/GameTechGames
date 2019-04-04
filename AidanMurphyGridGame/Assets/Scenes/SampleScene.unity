@@ -249,6 +249,8 @@ MonoBehaviour:
   MoveAmount: 6
   Move: 1
   color: {r: 0, g: 0, b: 0, a: 0}
+  playerNum: 1
+  currTurn: 1
 --- !u!212 &206613400
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 1 Wins
+  m_Text: 
 --- !u!222 &622330416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -789,6 +791,8 @@ MonoBehaviour:
   MoveAmount: 6
   Move: 1
   color: {r: 0, g: 0, b: 0, a: 0}
+  playerNum: 2
+  currTurn: 1
 --- !u!1 &1624026542
 GameObject:
   m_ObjectHideFlags: 0
