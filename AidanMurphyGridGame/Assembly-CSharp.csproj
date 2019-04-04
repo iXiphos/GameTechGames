@@ -62,11 +62,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\Heap.cs" />
-    <Compile Include="Assets\Scripts\MouseManager.cs" />
+    <Compile Include="Assets\Scripts\NextScene.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\PathRequestManager.cs" />
-    <Compile Include="Assets\Scripts\PlayerControllers.cs" />
+    <Compile Include="Assets\Scripts\Square.cs" />
     <Compile Include="Assets\Scripts\TurnManager.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

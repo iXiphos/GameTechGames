@@ -26,6 +26,8 @@ public class Unit : MonoBehaviour
 
     public bool currTurn = true;
 
+    public Vector3 currLoc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,10 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
+        //Check the Tiles around the player to see if they have lost
         checkTilesAround();
+
+        //If they can move, display the line
         if (Move)
         {
             line.enabled = true;
@@ -50,54 +55,64 @@ public class Unit : MonoBehaviour
         {
             line.enabled = false;
         }
+        
+        //If it is the current players turn allow them to move
         if (currTurn) MovePlayer();
     }
 
+    //Display the path for the player, and if they right click, move them to that position
     void MovePlayer()
     {
+        //If Player Left Clicks, path them to the location
         if (Input.GetMouseButtonDown(0) && Move)
         {
-            PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), OnPathFound);
+            PathRequestManager.RequestPath(transform.position, currLoc, OnPathFound);
         }
-        else if (Input.GetMouseButtonDown(1) && Move && !grid.NodeFromWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition)).isWall)
+        else if (Input.GetMouseButtonDown(1) && Move && !grid.NodeFromWorldPosition(currLoc).isWall) //Else if it is not a wall and they right click, change it to a wall
         {
             Move = false;
             blockTile();
         }
-        else if(Move)
+        else if(Move) //Else if they can move, draw a path
         {
-            PathRequestManager.RequestPath(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), drawPath);
+            PathRequestManager.RequestPath(transform.position, currLoc, drawPath);
         }
     }
 
+    //Check for tiles around player and see if they are walls
     void checkTilesAround()
     {
         bool captured = false;
+
+        //Check all nodes around player
         List<Node> tmp;
         tmp = grid.GetNeighboringNodes(grid.NodeFromWorldPosition(transform.position));
         foreach(Node node in tmp) {
-            if (!node.isWall)
+            if (!node.isWall) //If one is not a wall, they are are not captured
             {
                 captured = true;
             }
         }
 
+        //If they can't move they the other player wins
         if (!captured)
         {
             TurnManager.GetComponent<TurnManager>().Win("Player " + playerNum + " wins");
         }
     }
     
+    //Turn the tile into a wall and change the color
     void blockTile()
     {
-        Node tmp = grid.NodeFromWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Node tmp = grid.NodeFromWorldPosition(currLoc);
         tmp.square.GetComponent<SpriteRenderer>().color = new Color(253f, 255f, 0f, 110f / 255f);
         tmp.isWall = true;
     }
 
-
+    //Display the path using a line renderer
     public void drawPath(Vector3[] newPath, bool pathSuccessful)
     {
+        //If the path is a certain size, display the path
         if (pathSuccessful && newPath.Length <= MoveAmount && newPath.Length > 0)
         {
             path = newPath;
@@ -149,23 +164,6 @@ public class Unit : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
 
-        }
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (path != null)
-        {
-            for (int i = targetIndex; i < path.Length; i++)
-            {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], new Vector3(0.5f, 0.5f, 0.5f));
-
-                if (i == targetIndex)
-                {
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-            }
         }
     }
 }
