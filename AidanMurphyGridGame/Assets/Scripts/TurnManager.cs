@@ -42,12 +42,17 @@ public class TurnManager : MonoBehaviour
             player2.GetComponent<Unit>().currTurn = true;
         }
         //Change Turn Text
-        txt.text = "Turn: 0";
+        txt.text = "Turn: 1";
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
         //If Players are on same space
         if (grid.NodeFromWorldPosition(player1.transform.position).Position == grid.NodeFromWorldPosition(player2.transform.position).Position)
         {
@@ -123,7 +128,7 @@ public class TurnManager : MonoBehaviour
 
             //Increase Turn and Change Count
             TurnCount++;
-            txt.text = "Turn: " + TurnCount;
+            txt.text = "Turn: " + (TurnCount + 1);
 
             //Check for turn and change it accordingly
             if (TurnCount % 2 == 0)
