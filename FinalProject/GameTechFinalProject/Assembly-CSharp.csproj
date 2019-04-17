@@ -60,6 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BloomEffect.cs" />
+    <Compile Include="Assets\Scripts\pulse.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
     <None Include="Assets\Shaders\ReflectSprite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
