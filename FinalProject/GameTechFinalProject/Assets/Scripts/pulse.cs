@@ -11,7 +11,7 @@ public class pulse : MonoBehaviour
         if (gameObject.GetComponent<Rigidbody2D>().velocity.x > 2.5f || gameObject.GetComponent<Rigidbody2D>().velocity.y > 2.5f)
         {
             GameObject pulseParticle = Instantiate(pulseEffect, transform.position, transform.rotation);
-            Destroy(pulseParticle, gameObject.GetComponent<Rigidbody2D>().velocity.x + gameObject.GetComponent<Rigidbody2D>().velocity.y - 1.5f);
+            //Destroy(pulseParticle, gameObject.GetComponent<Rigidbody2D>().velocity.x + gameObject.GetComponent<Rigidbody2D>().velocity.y - 1.5f);
         }
     }
 }
