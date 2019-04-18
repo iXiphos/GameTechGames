@@ -80,7 +80,8 @@ Shader "Spelonko/IceCrystal"
 
 			float4 frag(v2f i) : SV_Target
 			{
-				return tex2D(_GlobalRefractionTex, i.screenuv);
+				float4 col = tex2D(_GlobalRefractionTex, i.screenuv);
+				return col;
 			}
 			ENDCG
 		}
