@@ -60,15 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FloorDetection.cs" />
-    <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\BloomEffect.cs" />
     <Compile Include="Assets\Scripts\DefaultFire.cs" />
+    <Compile Include="Assets\Scripts\FloorDetection.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\pulse.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
+    <Compile Include="Assets\Scripts\SpawnBall.cs" />
     <Compile Include="Assets\Scripts\StateStuff.cs" />
-    <Compile Include="Assets\SpawnBall.cs" />
     <None Include="Assets\Shaders\ReflectSprite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aemur/source/repos/aidan-murphy/FinalProject/GameTechFinalProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
