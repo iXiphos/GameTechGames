@@ -63,8 +63,11 @@
     <Compile Include="Assets\FloorDetection.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\BloomEffect.cs" />
+    <Compile Include="Assets\Scripts\DefaultFire.cs" />
+    <Compile Include="Assets\Scripts\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\pulse.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
+    <Compile Include="Assets\Scripts\StateStuff.cs" />
     <Compile Include="Assets\SpawnBall.cs" />
     <None Include="Assets\Shaders\ReflectSprite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
