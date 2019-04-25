@@ -8,6 +8,11 @@ public class PlayerShooting : MonoBehaviour
 {
     public GameObject pulseEffect;
 
+    [HideInInspector]
+    public Vector3 mousePos, //Mouse Position when mouse is clicked
+                   adjustedPos, //The adjusted mouse position
+                   randomPos; //Random Spread
+
     //Screen Shake Stuff
     public float shakeLength;
     public Transform camTransform;
@@ -41,11 +46,13 @@ public class PlayerShooting : MonoBehaviour
     [HideInInspector]
     public float bulletSpeed; //How quickly bullet travels
 
+    public bool reloading;
+
     // Start is called before the first frame update
     void Start()
     {
         originalPos = camTransform.position; //Original Camera Position
-        ammoCount = 1000; //Default Ammo count
+        ammoCount = 9; //Default Ammo count
         bulletSpeed = BulletSpeed; //Set bullet speed
         attackRate = AttackSpeed; //Set attack speed
         stateMachine = new StateMachine<PlayerShooting>(this); //Create Statemachine of type player shooting
@@ -54,22 +61,34 @@ public class PlayerShooting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //If ammo count is 0, go back to default fire
-        if (ammoCount == 0)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading)
         {
-            stateMachine.ChangeState(DefaultFire.Instance);
+            StartCoroutine(reload());
         }
 
         //If button is pressed, fire
-        if (Input.GetKey(KeyCode.Space) && Time.time > timeToNextAttack)
+        if (Input.GetMouseButton(0) && Time.time > timeToNextAttack && ammoCount != 0 && !reloading)
         {
-            GameObject pulseParticle = Instantiate(pulseEffect, bulletSpawn.transform.position, transform.rotation);
+
+            GameObject pulse = Instantiate(pulseEffect, transform.position, transform.rotation);
+            Destroy(pulse, 10f);
+            mousePos = Input.mousePosition; //Get Mouse Position
+            adjustedPos = Camera.main.ScreenToWorldPoint(mousePos); //Adjusted Position
+            adjustedPos.z = 0; //Set the z to zero
+            ScreenShake(); //Shake Screen
             stateMachine.Update();
-            shakeDuration = shakeLength;
         }
-        ScreenShake(); //Shake Screen
+    }
+
+    IEnumerator reload()
+    {
+        reloading = true;
+        yield return new WaitForSeconds(1f);
+        reloading = false;
+        ammoCount = 9;
     }
 
     //Screen shake

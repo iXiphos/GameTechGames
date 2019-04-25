@@ -52,9 +52,11 @@ public class DefaultFire : State<PlayerShooting>
     void Fire(PlayerShooting _owner)
     {
         _owner.timeToNextAttack = Time.time + _owner.attackRate;
-        GameObject bullet = Object.Instantiate(_owner.bulletPrefab, _owner.bulletSpawn.position, _owner.bulletSpawn.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.right * _owner.bulletSpeed);
-        Object.Destroy(bullet, 3f);
+        _owner.ammoCount--;
+        GameObject bullet = GameObject.Instantiate(_owner.bulletPrefab, _owner.transform.position, _owner.transform.rotation);
+        bullet.transform.right = _owner.adjustedPos - _owner.transform.position;
+        bullet.GetComponent<Rigidbody2D>().velocity = _owner.BulletSpeed * bullet.transform.right;
+        GameObject.Destroy(bullet, 5f);
     }
 
 }
