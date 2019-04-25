@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         isGrounded = feet.GetComponent<FloorDetection>().touchingFloor;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (isGrounded)
             {

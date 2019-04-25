@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
+    public GameObject pulseEffect;
+
     //Screen Shake Stuff
     public float shakeLength;
     public Transform camTransform;
@@ -63,6 +65,7 @@ public class PlayerShooting : MonoBehaviour
         //If button is pressed, fire
         if (Input.GetKey(KeyCode.Space) && Time.time > timeToNextAttack)
         {
+            GameObject pulseParticle = Instantiate(pulseEffect, bulletSpawn.transform.position, transform.rotation);
             stateMachine.Update();
             shakeDuration = shakeLength;
         }
