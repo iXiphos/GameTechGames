@@ -60,6 +60,7 @@ public class ScreenSpaceRefractions : MonoBehaviour
 
         _camera.targetTexture = new RenderTexture(_camera.pixelWidth >> _downResFactor, _camera.pixelHeight >> _downResFactor, 16);
         _camera.targetTexture.filterMode = FilterMode.Bilinear;
+        
 
         Shader.SetGlobalTexture(_globalTextureName, _camera.targetTexture);
     }

@@ -1,11 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Spelonko/IceCrystal"
+﻿Shader "Spelonko/IceCrystal"
 {
 	Properties
 	{
@@ -55,8 +48,11 @@ Shader "Spelonko/IceCrystal"
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
+				o.uv.y = 1 - o.uv.y;
 				o.screenuv = ((o.vertex.xy / o.vertex.w) + 1) * 0.5;
+				o.screenuv.y = 1 - o.screenuv.y;
 				o.color = v.color;
+				o.color.a = 1;
 				return o;
 			}
 
