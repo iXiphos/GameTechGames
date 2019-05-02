@@ -17,7 +17,6 @@ public class Damage : MonoBehaviour
         //Deal Damage to collision if the collision is enemy
         if(collision.tag == "Enemy")
         {
-            Debug.Log("Sup");
             collision.GetComponent<EnemyStatus>().health -= damageAmount;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<CircleCollider2D>().enabled = false;

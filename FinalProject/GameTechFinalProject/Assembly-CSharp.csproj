@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ScenesManager.cs" />
+    <Compile Include="Assets\LoadScore.cs" />
     <Compile Include="Assets\Scripts\BloomEffect.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
     <Compile Include="Assets\Scripts\EnemyStatus.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\StateStuff.cs" />
     <Compile Include="Assets\Scripts\pulse.cs" />
+    <Compile Include="Assets\Scripts\ScenesManager.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
     <Compile Include="Assets\Scripts\SpawnBall.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />

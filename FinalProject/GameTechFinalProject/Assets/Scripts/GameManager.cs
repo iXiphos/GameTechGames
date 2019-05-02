@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemy; //Enemy to be spawned
     public List<GameObject> activeEnemyList; //Active enemies
 
-    private int waveCount = 0;
+    public int waveCount = 0;
 
     private int waveSize = 1; //Current Wave Count
 
@@ -30,13 +30,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         BlackFade.canvasRenderer.SetAlpha(0.0f); //Set alpha to zero for fade to black
+        //loseText.canvasRenderer.SetAlpha(0.0f);
         instance = this; //Set up instance
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        loseText.text = "Wave: " + (waveCount + 1);
+        if (loseText != null) loseText.text = "Wave: " + (waveCount + 1);
         if (!waveActive) //Is there a wave currently active
         {
             StartCoroutine(waveSpawner()); //Start Wave Spawner
@@ -44,12 +46,7 @@ public class GameManager : MonoBehaviour
 
         if (dead) //Is player dead
         {
-            FadeToBlack(); //Fade in black screen
-            //Go to next scene
-            if (Input.GetKeyDown(KeyCode.Return)) //If player presses enter, reset scene
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-            }
+            StartCoroutine(FadeToBlack()); //Fade in black screen
         }
     }
 
@@ -62,10 +59,13 @@ public class GameManager : MonoBehaviour
     }
 
     //Fade in the black screen and text
-    void FadeToBlack()
+    IEnumerator FadeToBlack()
     {
+        dead = false;
         BlackFade.CrossFadeAlpha(1.0f, 0.4f, false);
-        loseText.CrossFadeAlpha(1.0f, 0.5f, false);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(2);
+        Destroy(gameObject, 1f);
     }
 
     //Remove enemy from active enemy list
