@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public GameObject pulseEffect;
+    public GameObject pulseEffect; //Pulse to Be Created
 
     [HideInInspector]
     public Vector3 mousePos, //Mouse Position when mouse is clicked
@@ -20,6 +20,7 @@ public class PlayerShooting : MonoBehaviour
     public float shakeDuration = 0f;
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
+
     [HideInInspector]
     public Vector3 originalPos;
 
@@ -86,6 +87,7 @@ public class PlayerShooting : MonoBehaviour
         ScreenShake(); //Shake Screen
     }
 
+    //Set Player to Reloading
     IEnumerator reload()
     {
         reloading = true;

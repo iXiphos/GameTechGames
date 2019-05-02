@@ -21,8 +21,8 @@ public class Damage : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             GameObject particle = Instantiate(particleSystems, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.Euler(0, 0, 15));
-            Destroy(particle, 10f);
-            Destroy(gameObject, 3f);
+            Destroy(particle, 5f);
+            Destroy(gameObject);
         }
     }
 }

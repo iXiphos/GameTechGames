@@ -17,6 +17,7 @@ public class ScenesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //If space is pressed go to next scene
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(nextScene);

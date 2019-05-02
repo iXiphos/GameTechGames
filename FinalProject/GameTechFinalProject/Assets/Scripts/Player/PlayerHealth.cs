@@ -9,9 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool hitFrames = false; //Has the player been hit recently
 
-    public Text healthText;
-
-    public Image redFlash; //Image that flashes when damage is taken
+    public Text healthText; //Text For health
 
     // Update is called once per frame
     void Update()

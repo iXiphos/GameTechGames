@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour {
 
     public void FixedUpdate()
     {
+        //If the enemy is still alive, move towards the player
         if(!dead) MoveTowardsPlayer();
         if(Vector3.Distance(target.position, gameObject.transform.position) <= 1f && target != null)
         {
@@ -36,6 +37,7 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    //Destroy enemy and all the components to avoid errors, and remove from active enemy list
     public void DestroyEnemy()
     {
         StopCoroutine("FollowPath");
@@ -47,10 +49,13 @@ public class Unit : MonoBehaviour {
         dead = true;
     }
 
+    //Move towardst the player
     void MoveTowardsPlayer()
     {
+        //If player is alive and this gameobject is still alive
         if (transform != null && target != null)
         {
+            //Rotate towards the player and slowly move towards them
             Vector3 targetDir = target.position - transform.position;
             float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);

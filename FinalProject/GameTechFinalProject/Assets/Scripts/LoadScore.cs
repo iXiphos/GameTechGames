@@ -13,6 +13,7 @@ public class LoadScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Load the Final Score of the player
         score = gameObject.GetComponent<Text>();
         manager = GameObject.Find("GameManager");
         score.text = "You Lasted " + manager.GetComponent<GameManager>().waveCount + " Waves\n Press Space to Restart";

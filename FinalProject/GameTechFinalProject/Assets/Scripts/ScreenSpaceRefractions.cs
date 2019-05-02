@@ -21,18 +21,22 @@ public class ScreenSpaceRefractions : MonoBehaviour
     private string _globalVisibilityName = "_GlobalVisibility";
     private string _globalMagnitudeName = "_GlobalRefractionMag";
 
+
+    //Refraction
     public void VisibilityChange(float value)
     {
         _refractionVisibility = value;
         Shader.SetGlobalFloat(_globalVisibilityName, _refractionVisibility);
     }
 
+    //How much to change it by
     public void MagnitudeChange(float value)
     {
         _refractionMagnitude = value;
         Shader.SetGlobalFloat(_globalMagnitudeName, _refractionMagnitude);
     }
 
+    //When this starts up
     void OnEnable()
     {
         GenerateRT();
@@ -46,6 +50,8 @@ public class ScreenSpaceRefractions : MonoBehaviour
         Shader.SetGlobalFloat(_globalMagnitudeName, _refractionMagnitude);
     }
 
+
+    //Create the Render Texture
     void GenerateRT()
     {
         _camera = GetComponent<Camera>();

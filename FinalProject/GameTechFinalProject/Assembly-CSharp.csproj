@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\BloomEffect.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
     <Compile Include="Assets\Scripts\EnemyStatus.cs" />
-    <Compile Include="Assets\Scripts\FloorDetection.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LoadScore.cs" />
     <Compile Include="Assets\Scripts\Player\DefaultFire.cs" />
@@ -71,10 +70,8 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\StateStuff.cs" />
-    <Compile Include="Assets\Scripts\pulse.cs" />
     <Compile Include="Assets\Scripts\ScenesManager.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
-    <Compile Include="Assets\Scripts\SpawnBall.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <None Include="Assets\Shaders\ReflectSprite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

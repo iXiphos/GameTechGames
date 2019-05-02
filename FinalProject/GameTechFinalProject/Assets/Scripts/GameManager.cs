@@ -61,16 +61,18 @@ public class GameManager : MonoBehaviour
     //Fade in the black screen and text
     IEnumerator FadeToBlack()
     {
+
+        //Destroy All Active Enemies
         while(activeEnemyList.Count > 0)
         {
             Destroy(activeEnemyList[0]);
             activeEnemyList.RemoveAt(0);
         }
-        dead = false;
-        BlackFade.CrossFadeAlpha(1.0f, 0.4f, false);
+        dead = false; //Set Dead to False
+        BlackFade.CrossFadeAlpha(1.0f, 0.4f, false); //Fade to black
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(2);
-        Destroy(gameObject, 1f);
+        SceneManager.LoadScene(2); //Load next Scene
+        Destroy(gameObject, 1f); //Destroy this
     }
 
     //Remove enemy from active enemy list
@@ -87,25 +89,28 @@ public class GameManager : MonoBehaviour
 
     IEnumerator waveSpawner()
     {
+        //Set wave active
         waveActive = true;
-        int k = 0;
+        int k = 0; //k controls how many to spawn
+        //spawn in enemies over time
         while (true)
         {
             if (k < waveSize)
             {
                 for (int i = 0; i < waveSize; i++)
                 {
-                    int rand = Random.Range(0, spawnLocations.Count);
-                    GameObject enemies = Instantiate(enemy, spawnLocations[rand], transform.rotation);
-                    enemies.GetComponent<EnemyStatus>().manager = gameObject;
-                    enemies.GetComponent<Unit>().manager = gameObject;
-                    activeEnemyList.Add(enemies);
-                    k++;
-                    yield return new WaitForSeconds(enemyDelay);
+                    int rand = Random.Range(0, spawnLocations.Count); //Get random location
+                    GameObject enemies = Instantiate(enemy, spawnLocations[rand], transform.rotation); //Spawn enemy
+                    enemies.GetComponent<EnemyStatus>().manager = gameObject; //Set manager on enemy
+                    enemies.GetComponent<Unit>().manager = gameObject; //Get manager on enemy
+                    activeEnemyList.Add(enemies); //Add to active list
+                    k++; //Increase k
+                    yield return new WaitForSeconds(enemyDelay); //Delay next spawn
                 }
             }
             if (activeEnemyList.Count == 0) //If all enemies are dead break
             {
+                //Reduce enemy Delay
                 if(enemyDelay < 0.2)
                     enemyDelay -= 0.05f;
                 waveSize++;

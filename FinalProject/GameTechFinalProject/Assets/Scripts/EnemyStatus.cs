@@ -16,6 +16,7 @@ public class EnemyStatus : MonoBehaviour
 
     private void Update()
     {
+        //Destory enemy if health drops to 0
         if(health <= 0)
         {
             gameObject.GetComponent<Unit>().DestroyEnemy();
