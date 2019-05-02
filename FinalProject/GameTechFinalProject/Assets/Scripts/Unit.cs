@@ -21,13 +21,14 @@ public class Unit : MonoBehaviour {
 
     private void Update()
     {
-        target = GameObject.Find("Player").transform;
+        if(target != null)
+            target = GameObject.Find("Player").transform;
     }
 
     public void FixedUpdate()
     {
-        MoveTowardsPlayer();
-        if(Vector3.Distance(target.position, gameObject.transform.position) <= 1f)
+        if(!dead) MoveTowardsPlayer();
+        if(Vector3.Distance(target.position, gameObject.transform.position) <= 1f && target != null)
         {
             target.gameObject.GetComponent<PlayerHealth>().doDamage();
             manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
@@ -48,11 +49,14 @@ public class Unit : MonoBehaviour {
 
     void MoveTowardsPlayer()
     {
-        Vector3 targetDir = target.position - transform.position;
-        float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation , q, 180f);
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        if (transform != null && target != null)
+        {
+            Vector3 targetDir = target.position - transform.position;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
+            transform.Translate(Vector3.up * Time.deltaTime * speed);
+        }
     }
 
 }

@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
     //Fade in the black screen and text
     IEnumerator FadeToBlack()
     {
+        while(activeEnemyList.Count > 0)
+        {
+            Destroy(activeEnemyList[0]);
+            activeEnemyList.RemoveAt(0);
+        }
         dead = false;
         BlackFade.CrossFadeAlpha(1.0f, 0.4f, false);
         yield return new WaitForSeconds(1f);
