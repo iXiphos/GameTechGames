@@ -26,7 +26,13 @@ public class Unit : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        moveTowardsPlayer();
+        MoveTowardsPlayer();
+        if(Vector3.Distance(target.position, gameObject.transform.position) <= 1f)
+        {
+            target.gameObject.GetComponent<PlayerHealth>().doDamage();
+            manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     public void DestroyEnemy()
@@ -40,7 +46,7 @@ public class Unit : MonoBehaviour {
         dead = true;
     }
 
-    void moveTowardsPlayer()
+    void MoveTowardsPlayer()
     {
         Vector3 targetDir = target.position - transform.position;
         float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;

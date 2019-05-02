@@ -8,10 +8,6 @@ public class EnemyStatus : MonoBehaviour
 
     public GameObject manager; //Game manager
 
-    public GameObject drop; //Item Drop
-
-    public AudioSource source; //Audio Source when hit
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +21,5 @@ public class EnemyStatus : MonoBehaviour
             gameObject.GetComponent<Unit>().DestroyEnemy();
         }
     }
-    
-    //Check for collision
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Player") //If collides with player, deal damage and play audio
-        {
-            manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
-            collision.gameObject.GetComponent<PlayerHealth>().doDamage();
-            Destroy(gameObject);
-        }
-    }
+   
 }

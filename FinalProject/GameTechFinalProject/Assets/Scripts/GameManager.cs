@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        //BlackFade.canvasRenderer.SetAlpha(0.0f); //Set alpha to zero for fade to black
-        //loseText.canvasRenderer.SetAlpha(0.0f); //Set alpha to zero for lose text
+        BlackFade.canvasRenderer.SetAlpha(0.0f); //Set alpha to zero for fade to black
         instance = this; //Set up instance
     }
 

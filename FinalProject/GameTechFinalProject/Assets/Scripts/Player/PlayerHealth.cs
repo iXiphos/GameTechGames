@@ -9,9 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     private bool hitFrames = false; //Has the player been hit recently
 
-    public Image[] healthImages; //Images for health
-
-    public Sprite emptyHealth; //Empty Health Sprite
+    public Text healthText;
 
     public Image redFlash; //Image that flashes when damage is taken
 
@@ -19,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         DestroyPlayer(); //Destroy player if they take enough damage
+        healthText.text = "Health: " + Health;
     }
 
     //Deal Damage to Player
@@ -28,7 +27,6 @@ public class PlayerHealth : MonoBehaviour
         if (!hitFrames)
         {
             Health--;
-            healthImages[Health].sprite = emptyHealth;
             hitFrames = true;
             StartCoroutine(flashSprite());
         }
@@ -37,7 +35,6 @@ public class PlayerHealth : MonoBehaviour
     //Flash the Sprite to indicate getting hit
     IEnumerator flashSprite()
     {
-        StartCoroutine(flashRed());
         float timeToEnd = 1.6f + Time.time;
         while(timeToEnd > Time.time)
         {
@@ -47,14 +44,6 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(.2f);
         }
         hitFrames = false;
-    }
-
-    //Flash the screen red to also indicate getting hit
-    IEnumerator flashRed()
-    {
-        redFlash.enabled = true;
-        yield return new WaitForSeconds(0.05f);
-        redFlash.enabled = false;
     }
 
     //Destroy player if there health hits 0

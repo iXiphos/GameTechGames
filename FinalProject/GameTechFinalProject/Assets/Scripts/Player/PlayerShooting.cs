@@ -89,7 +89,7 @@ public class PlayerShooting : MonoBehaviour
     IEnumerator reload()
     {
         reloading = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         reloading = false;
         ammoCount = 31;
     }

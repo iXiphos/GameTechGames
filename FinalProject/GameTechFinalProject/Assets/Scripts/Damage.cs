@@ -8,16 +8,16 @@ public class Damage : MonoBehaviour
 
     public GameObject particleSystems; //Sound effect
 
-
-
     private void Start()
     {
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {   //Deal Damage to collision if the collision is enemy, turn of object to play sound effect, then destroy it
+    {   
+        //Deal Damage to collision if the collision is enemy
         if(collision.tag == "Enemy")
         {
+            Debug.Log("Sup");
             collision.GetComponent<EnemyStatus>().health -= damageAmount;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
