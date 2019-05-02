@@ -60,12 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LoadScore.cs" />
     <Compile Include="Assets\Scripts\BloomEffect.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
     <Compile Include="Assets\Scripts\EnemyStatus.cs" />
     <Compile Include="Assets\Scripts\FloorDetection.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LoadScore.cs" />
     <Compile Include="Assets\Scripts\Player\DefaultFire.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
