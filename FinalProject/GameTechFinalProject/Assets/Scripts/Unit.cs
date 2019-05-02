@@ -23,30 +23,30 @@ public class Unit : MonoBehaviour {
     {
         if(target != null)
             target = GameObject.Find("Player").transform;
+
+        if (transform != null)
+        {
+            if (Vector3.Distance(target.position, transform.position) <= 1f && target != null && !dead)
+            {
+                target.gameObject.GetComponent<PlayerHealth>().doDamage();
+                manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void FixedUpdate()
     {
         //If the enemy is still alive, move towards the player
         if(!dead) MoveTowardsPlayer();
-        if(Vector3.Distance(target.position, gameObject.transform.position) <= 1f && target != null)
-        {
-            target.gameObject.GetComponent<PlayerHealth>().doDamage();
-            manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
-            Destroy(gameObject);
-        }
     }
 
     //Destroy enemy and all the components to avoid errors, and remove from active enemy list
     public void DestroyEnemy()
     {
-        StopCoroutine("FollowPath");
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<EnemyStatus>().enabled = false;
-        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        dead = true;
         manager.GetComponent<GameManager>().RemoveEnemy(gameObject);
         Destroy(gameObject);
-        dead = true;
     }
 
     //Move towardst the player
