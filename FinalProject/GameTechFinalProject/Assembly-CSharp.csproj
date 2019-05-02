@@ -65,12 +65,6 @@
     <Compile Include="Assets\Scripts\EnemyStatus.cs" />
     <Compile Include="Assets\Scripts\FloorDetection.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Grid.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Heap.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\PathRequestManager.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\Player\DefaultFire.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
@@ -79,6 +73,7 @@
     <Compile Include="Assets\Scripts\pulse.cs" />
     <Compile Include="Assets\Scripts\ScreenSpaceRefractions.cs" />
     <Compile Include="Assets\Scripts\SpawnBall.cs" />
+    <Compile Include="Assets\Scripts\Unit.cs" />
     <None Include="Assets\Shaders\ReflectSprite.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/aemur/source/repos/aidan-murphy/FinalProject/GameTechFinalProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

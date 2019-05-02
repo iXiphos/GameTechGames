@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        loseText.text = "Wave: " + (waveCount + 1);
         if (!waveActive) //Is there a wave currently active
         {
             StartCoroutine(waveSpawner()); //Start Wave Spawner
@@ -44,8 +45,6 @@ public class GameManager : MonoBehaviour
 
         if (dead) //Is player dead
         {
-            if(waveCount == 0) loseText.text = "You Survived " + (waveCount + 1) + " Wave!" + "\n" + "Press Enter to Try Again"; //Show user how many waves they survived
-            else loseText.text = "You Survived " + (waveCount + 1) + " Waves!" + "\n" + "Press Enter to Try Again"; //Show user how many waves they survived
             FadeToBlack(); //Fade in black screen
             //Go to next scene
             if (Input.GetKeyDown(KeyCode.Return)) //If player presses enter, reset scene
@@ -85,7 +84,6 @@ public class GameManager : MonoBehaviour
     IEnumerator waveSpawner()
     {
         waveActive = true;
-        waveSize++;
         int k = 0;
         while (true)
         {
@@ -112,5 +110,7 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
+        yield return new WaitForSeconds(WaveDelay);
+        waveCount++;
     }
 }

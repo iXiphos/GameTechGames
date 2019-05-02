@@ -52,7 +52,7 @@
 				o.screenuv = ((o.vertex.xy / o.vertex.w) + 1) * 0.5;
 				o.screenuv.y = 1 - o.screenuv.y;
 				o.color = v.color;
-				o.color.a = 1;
+				o.color.a = 100;
 				return o;
 			}
 

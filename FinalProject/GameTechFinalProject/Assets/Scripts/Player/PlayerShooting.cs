@@ -52,7 +52,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         originalPos = camTransform.position; //Original Camera Position
-        ammoCount = 9; //Default Ammo count
+        ammoCount = 31; //Default Ammo count
         bulletSpeed = BulletSpeed; //Set bullet speed
         attackRate = AttackSpeed; //Set attack speed
         stateMachine = new StateMachine<PlayerShooting>(this); //Create Statemachine of type player shooting
@@ -63,6 +63,8 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bulletText.text = "Ammo: " + ammoCount;
+
         //If ammo count is 0, go back to default fire
         if (Input.GetKeyDown(KeyCode.R) && !reloading)
         {
@@ -78,17 +80,18 @@ public class PlayerShooting : MonoBehaviour
             mousePos = Input.mousePosition; //Get Mouse Position
             adjustedPos = Camera.main.ScreenToWorldPoint(mousePos); //Adjusted Position
             adjustedPos.z = 0; //Set the z to zero
-            ScreenShake(); //Shake Screen
             stateMachine.Update();
+            shakeDuration = shakeAmount;
         }
+        ScreenShake(); //Shake Screen
     }
 
     IEnumerator reload()
     {
         reloading = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         reloading = false;
-        ammoCount = 9;
+        ammoCount = 31;
     }
 
     //Screen shake
