@@ -1,0 +1,2 @@
+This is a two player game where the goal is to make it so the other player can't move, or you touch the other player.
+You can move by left clicking on a space and you can block a space by right clicking on one.

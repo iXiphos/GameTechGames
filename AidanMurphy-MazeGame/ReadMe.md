@@ -1,0 +1,2 @@
+This game is about working your way through a maze. Upon grabing the key, you will upset the guardian, who will track you down until he kills you or you escape the level.
+This was done using A* pathfinding
